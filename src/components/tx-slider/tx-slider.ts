@@ -1,6 +1,6 @@
 import { LitElement, html, css } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
-import { txTokens } from '../styles/tx-tokens.js';
+import { txTokens } from '../../styles/tx-tokens.js';
 
 @customElement('tx-slider')
 export class TxSlider extends LitElement {
@@ -25,15 +25,13 @@ export class TxSlider extends LitElement {
       }
 
       label {
-        font-size: 0.78rem;
+        font-size: var(--tx-text-xs);
         font-weight: 600;
         color: var(--tx-text-secondary);
-        letter-spacing: 0.02em;
-        padding-left: 2px;
       }
 
       .value-display {
-        font-size: 0.82rem;
+        font-size: var(--tx-text-xs);
         font-weight: 600;
         color: var(--tx-text);
         font-variant-numeric: tabular-nums;
@@ -50,10 +48,9 @@ export class TxSlider extends LitElement {
         -webkit-appearance: none;
         appearance: none;
         width: 100%;
-        height: 6px;
-        background: var(--tx-bg);
+        height: 4px;
+        background: var(--tx-border);
         border-radius: var(--tx-radius-pill);
-        box-shadow: var(--tx-shadow-inset-sm);
         outline: none;
         cursor: pointer;
       }
@@ -61,40 +58,39 @@ export class TxSlider extends LitElement {
       input[type='range']::-webkit-slider-thumb {
         -webkit-appearance: none;
         appearance: none;
-        width: 22px;
-        height: 22px;
+        width: 18px;
+        height: 18px;
         border-radius: 50%;
-        background: var(--tx-bg);
-        box-shadow: var(--tx-shadow-sm);
-        border: 3px solid var(--tx-primary);
+        background: var(--tx-surface);
+        box-shadow: var(--tx-shadow-sm), 0 0 0 2px var(--tx-primary);
         cursor: grab;
         transition: var(--tx-transition);
       }
 
       input[type='range']::-moz-range-thumb {
-        width: 22px;
-        height: 22px;
+        width: 18px;
+        height: 18px;
         border-radius: 50%;
-        background: var(--tx-bg);
-        box-shadow: var(--tx-shadow-sm);
-        border: 3px solid var(--tx-primary);
+        background: var(--tx-surface);
+        box-shadow: var(--tx-shadow-sm), 0 0 0 2px var(--tx-primary);
+        border: none;
         cursor: grab;
         transition: var(--tx-transition);
       }
 
       input[type='range']:active::-webkit-slider-thumb {
-        box-shadow: var(--tx-shadow-inset-sm);
+        box-shadow: var(--tx-shadow-sm), 0 0 0 2px var(--tx-primary), var(--tx-ring-focus);
         cursor: grabbing;
       }
 
       input[type='range']:active::-moz-range-thumb {
-        box-shadow: var(--tx-shadow-inset-sm);
+        box-shadow: var(--tx-shadow-sm), 0 0 0 2px var(--tx-primary), var(--tx-ring-focus);
         cursor: grabbing;
       }
 
       input[type='range']:focus-visible {
         outline: 2px solid var(--tx-primary);
-        outline-offset: 6px;
+        outline-offset: 4px;
         border-radius: var(--tx-radius-pill);
       }
     `,

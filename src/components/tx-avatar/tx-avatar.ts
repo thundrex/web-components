@@ -1,6 +1,6 @@
 import { LitElement, html, css } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
-import { txTokens } from '../styles/tx-tokens.js';
+import { txTokens } from '../../styles/tx-tokens.js';
 
 @customElement('tx-avatar')
 export class TxAvatar extends LitElement {
@@ -16,17 +16,17 @@ export class TxAvatar extends LitElement {
         display: flex;
         align-items: center;
         justify-content: center;
-        width: 40px;
-        height: 40px;
+        width: 36px;
+        height: 36px;
         border-radius: 50%;
-        background: var(--tx-bg);
+        background: var(--tx-primary-soft);
         color: var(--tx-primary);
         font-family: var(--tx-font);
-        font-size: 0.85rem;
+        font-size: var(--tx-text-xs);
         font-weight: 700;
         overflow: hidden;
-        border: none;
-        box-shadow: var(--tx-shadow-sm);
+        border: 2px solid var(--tx-surface);
+        box-shadow: var(--tx-shadow-xs);
         user-select: none;
       }
 
@@ -36,23 +36,23 @@ export class TxAvatar extends LitElement {
         object-fit: cover;
       }
 
-      :host([size='sm']) .avatar { width: 32px; height: 32px; font-size: 0.72rem; }
-      :host([size='lg']) .avatar { width: 52px; height: 52px; font-size: 1.1rem; }
-      :host([size='xl']) .avatar { width: 64px; height: 64px; font-size: 1.3rem; }
+      :host([size='sm']) .avatar { width: 28px; height: 28px; font-size: 0.65rem; }
+      :host([size='lg']) .avatar { width: 44px; height: 44px; font-size: var(--tx-text-sm); }
+      :host([size='xl']) .avatar { width: 56px; height: 56px; font-size: var(--tx-text-base); }
 
       .status {
         position: absolute;
         bottom: 0;
         right: 0;
-        width: 12px;
-        height: 12px;
+        width: 10px;
+        height: 10px;
         border-radius: 50%;
         border: 2px solid var(--tx-surface);
         background: #D1D5DB;
       }
 
-      :host([size='sm']) .status { width: 10px; height: 10px; }
-      :host([size='lg']) .status, :host([size='xl']) .status { width: 14px; height: 14px; }
+      :host([size='sm']) .status { width: 8px; height: 8px; }
+      :host([size='lg']) .status, :host([size='xl']) .status { width: 12px; height: 12px; }
 
       :host([status='online']) .status  { background: var(--tx-success); }
       :host([status='busy']) .status    { background: var(--tx-danger); }

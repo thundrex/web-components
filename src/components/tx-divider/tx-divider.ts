@@ -1,6 +1,6 @@
 import { LitElement, html, css } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
-import { txTokens } from '../styles/tx-tokens.js';
+import { txTokens } from '../../styles/tx-tokens.js';
 
 @customElement('tx-divider')
 export class TxDivider extends LitElement {
@@ -19,20 +19,16 @@ export class TxDivider extends LitElement {
 
       .line {
         flex: 1;
-        height: 2px;
-        background: transparent;
-        border-radius: 1px;
-        box-shadow:
-          1px 1px 2px var(--tx-neu-dark),
-          -1px -1px 2px var(--tx-neu-light);
+        height: 1px;
+        background: var(--tx-border);
       }
 
       .label {
-        font-size: 0.72rem;
-        font-weight: 600;
+        font-size: var(--tx-text-xs);
+        font-weight: 500;
         color: var(--tx-text-muted);
         text-transform: uppercase;
-        letter-spacing: 0.08em;
+        letter-spacing: 0.06em;
         white-space: nowrap;
       }
 
@@ -49,7 +45,7 @@ export class TxDivider extends LitElement {
       }
 
       :host([vertical]) .line {
-        width: 2px;
+        width: 1px;
         height: auto;
         flex: 1;
       }

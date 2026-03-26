@@ -1,6 +1,6 @@
 import { LitElement, html, css } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
-import { txTokens } from '../styles/tx-tokens.js';
+import { txTokens } from '../../styles/tx-tokens.js';
 
 @customElement('tx-progress')
 export class TxProgress extends LitElement {
@@ -25,13 +25,13 @@ export class TxProgress extends LitElement {
       }
 
       .label {
-        font-size: 0.78rem;
+        font-size: var(--tx-text-xs);
         font-weight: 600;
         color: var(--tx-text-secondary);
       }
 
       .value {
-        font-size: 0.78rem;
+        font-size: var(--tx-text-xs);
         font-weight: 600;
         color: var(--tx-text);
         font-variant-numeric: tabular-nums;
@@ -40,11 +40,10 @@ export class TxProgress extends LitElement {
       .track {
         width: 100%;
         height: 6px;
-        background: var(--tx-bg);
+        background: var(--tx-surface-alt);
         border-radius: var(--tx-radius-pill);
         overflow: hidden;
-        border: none;
-        box-shadow: var(--tx-shadow-inset-sm);
+        border: 1px solid var(--tx-border);
       }
 
       .fill {
@@ -60,7 +59,7 @@ export class TxProgress extends LitElement {
       :host([color='danger']) .fill  { background: var(--tx-danger); }
 
       :host([size='sm']) .track { height: 4px; }
-      :host([size='lg']) .track { height: 10px; }
+      :host([size='lg']) .track { height: 8px; }
     `,
   ];
 

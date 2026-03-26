@@ -1,6 +1,6 @@
 import { LitElement, html, css } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
-import { txTokens } from '../styles/tx-tokens.js';
+import { txTokens } from '../../styles/tx-tokens.js';
 
 @customElement('tx-badge')
 export class TxBadge extends LitElement {
@@ -15,20 +15,18 @@ export class TxBadge extends LitElement {
         display: inline-flex;
         align-items: center;
         gap: 5px;
-        padding: 3px 10px;
+        padding: 2px 8px;
         font-family: var(--tx-font);
-        font-size: 0.72rem;
+        font-size: var(--tx-text-xs);
         font-weight: 600;
-        letter-spacing: 0.03em;
+        letter-spacing: 0.02em;
         text-transform: uppercase;
         border-radius: var(--tx-radius-pill);
         white-space: nowrap;
         line-height: 1.6;
-        background: var(--tx-bg);
+        background: var(--tx-surface-alt);
         color: var(--tx-text-secondary);
-        box-shadow:
-          2px 2px 4px var(--tx-neu-dark),
-          -2px -2px 4px var(--tx-neu-light);
+        border: 1px solid var(--tx-border);
       }
 
       .dot {
@@ -39,13 +37,13 @@ export class TxBadge extends LitElement {
         flex-shrink: 0;
       }
 
-      :host([color='primary']) .badge { background: var(--tx-primary-soft); color: var(--tx-primary); }
-      :host([color='accent']) .badge  { background: var(--tx-accent-soft); color: #C48A1A; }
-      :host([color='success']) .badge { background: var(--tx-success-soft); color: #1E8E3E; }
-      :host([color='danger']) .badge  { background: var(--tx-danger-soft); color: #D32F2F; }
+      :host([color='primary']) .badge { background: var(--tx-primary-soft); color: #3B63CC; border-color: transparent; }
+      :host([color='accent']) .badge  { background: var(--tx-accent-soft); color: #B8891E; border-color: transparent; }
+      :host([color='success']) .badge { background: var(--tx-success-soft); color: #16803C; border-color: transparent; }
+      :host([color='danger']) .badge  { background: var(--tx-danger-soft); color: #DC2626; border-color: transparent; }
 
       :host([size='lg']) .badge {
-        padding: 5px 14px;
+        padding: 3px 12px;
         font-size: 0.78rem;
       }
     `,

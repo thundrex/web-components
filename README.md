@@ -1,66 +1,62 @@
-<p align="center">
-  <img src="https://img.shields.io/badge/built%20with-Lit-324FFF?style=flat-square&logo=lit" alt="Built with Lit" />
-  <img src="https://img.shields.io/badge/style-neumorphism-E8ECF0?style=flat-square" alt="Neumorphic" />
-  <img src="https://img.shields.io/badge/font-Red%20Hat%20Text-EE0000?style=flat-square" alt="Red Hat Text" />
-  <img src="https://img.shields.io/badge/tailwind-preset-38BDF8?style=flat-square&logo=tailwindcss&logoColor=white" alt="Tailwind Preset" />
-  <img src="https://img.shields.io/badge/a11y-WCAG%20AA-34C759?style=flat-square" alt="Accessible" />
-  <img src="https://img.shields.io/badge/license-MIT-blue?style=flat-square" alt="MIT License" />
-</p>
+# @thundrex/web-components
 
-<h1 align="center">thundre<b>X</b></h1>
-<p align="center"><strong>Neumorphic design system and web component library</strong></p>
-<p align="center">
-  Soft UI components with clean neumorphic shadows, Red Hat Text typography, full theming, a Tailwind CSS preset, and WCAG AA accessibility — ready to drop into any framework or plain HTML.
-</p>
+A clean, accessible design system and web component library built with [Lit](https://lit.dev). Themeable, framework-agnostic, and ships with a Tailwind CSS preset.
+
+[Documentation](https://thundrex.github.io/web-components/) · [GitHub](https://github.com/thundrex/web-components)
 
 ---
 
 ## Features
 
-- **Clean Neumorphism** — Subtle dual light/dark shadows on every element. Buttons extrude, inputs recess, interactive elements press in on click.
-- **Red Hat Text** — Primary font: Red Hat Text. Mono: Red Hat Mono. Clean, modern, open-source.
-- **Tailwind CSS Preset** — Drop-in Tailwind preset that maps all design tokens to utility classes. Theme-aware via CSS variables.
-- **3 Built-in Themes** — Light (`#E8ECF0`), Dark (pure black `#141414`), and Ocean. Switch with `setTheme()`.
-- **11 Components** — Button, Input, Toggle, Checkbox, Slider, Card, Badge, Avatar, Progress, Tag, Divider.
-- **Accessible** — WCAG AA contrast ratios, keyboard navigation, ARIA roles, and focus-visible outlines.
-- **Framework-agnostic** — Standard web components. Works with React, Vue, Angular, Svelte, or vanilla HTML.
-- **Zero runtime dependencies** beyond Lit. Tree-shakeable ES module output.
+- **11 components** — Button, Input, Toggle, Checkbox, Slider, Card, Badge, Avatar, Progress, Tag, Divider
+- **Accessible** — WCAG AA contrast, ARIA roles, keyboard navigation, focus management
+- **Themeable** — CSS custom properties power the entire system; three built-in themes (light, dark, ocean) plus custom themes via `setTheme()`
+- **Tailwind CSS preset** — Maps all design tokens to utility classes, theme-aware via CSS variables
+- **Framework-agnostic** — Works in React, Vue, Angular, Svelte, or plain HTML
+- **Red Hat Text / Mono** — Clean typography with eight size tokens
 
----
-
-## Quick Start
-
-### Install
+## Installation
 
 ```bash
 npm install @thundrex/web-components
 ```
 
-### Use
+## Quick Start
 
-```html
-<script type="module">
-  import '@thundrex/web-components';
-</script>
-
-<tx-button variant="primary">Get Started</tx-button>
-<tx-input label="Email" placeholder="you@example.com"></tx-input>
-<tx-toggle label="Dark Mode" checked></tx-toggle>
+```ts
+import '@thundrex/web-components';
 ```
 
-### CDN
-
 ```html
-<script type="module" src="https://unpkg.com/@thundrex/web-components"></script>
+<tx-button variant="primary">Click me</tx-button>
+<tx-input label="Name" placeholder="Enter your name"></tx-input>
+<tx-card>
+  <h3 slot="header">Hello</h3>
+  <p>This is a thundrex card.</p>
+</tx-card>
 ```
 
----
+## Theming
 
-## Tailwind CSS Integration
+```ts
+import { setTheme, resetTheme } from '@thundrex/web-components';
 
-thundrex ships a Tailwind preset that extends your config with all design tokens. All values reference CSS custom properties, so they respond to runtime theme switches.
+setTheme('dark');
+setTheme('ocean');
+setTheme({ accent: '#E040FB', primary: '#00BCD4' });
+resetTheme();
+```
 
-### Setup
+Or override tokens directly in CSS:
+
+```css
+:root {
+  --tx-primary: #e040fb;
+  --tx-accent: #00bcd4;
+}
+```
+
+## Tailwind CSS
 
 ```js
 // tailwind.config.js
@@ -68,258 +64,176 @@ import thundrex from '@thundrex/web-components/tailwind-preset';
 
 export default {
   presets: [thundrex],
-  content: ['./src/**/*.{html,js,ts,jsx,tsx}'],
+  content: ['./src/**/*.{html,js,ts}'],
 };
 ```
 
-### Available Classes
-
-#### Colors
-
-| Class | Token | Light value |
-|---|---|---|
-| `bg-tx-bg` | `--tx-bg` | `#E8ECF0` |
-| `bg-tx-surface` | `--tx-surface` | `#E8ECF0` |
-| `bg-tx-primary` | `--tx-primary` | `#4A7CFF` |
-| `bg-tx-accent` | `--tx-accent` | `#F3B23A` |
-| `bg-tx-success` | `--tx-success` | `#34C759` |
-| `bg-tx-danger` | `--tx-danger` | `#FF3B30` |
-| `text-tx-text` | `--tx-text` | `#1A2138` |
-| `text-tx-text-secondary` | `--tx-text-secondary` | `#4D5B6A` |
-| `text-tx-text-muted` | `--tx-text-muted` | `#6B7886` |
-
-#### Neumorphic Shadows
-
-| Class | Effect |
-|---|---|
-| `shadow-tx-sm` | Subtle extruded |
-| `shadow-tx-md` | Standard extruded |
-| `shadow-tx-lg` | Prominent extruded |
-| `shadow-tx-inset` | Standard recessed |
-| `shadow-tx-inset-sm` | Subtle recessed |
-
-#### Border Radius
-
-| Class | Value |
-|---|---|
-| `rounded-tx-sm` | 8px |
-| `rounded-tx` | 12px |
-| `rounded-tx-lg` | 16px |
-| `rounded-tx-xl` | 20px |
-| `rounded-tx-pill` | 999px |
-
-#### Spacing
-
-`p-tx-1` through `p-tx-16`, `m-tx-1` through `m-tx-16`, `gap-tx-1` through `gap-tx-16` — based on a 4px grid (4, 8, 12, 16, 20, 24, 32, 40, 48, 64px).
-
-#### Typography
-
-| Class | Value |
-|---|---|
-| `font-tx` | Red Hat Text |
-| `font-tx-mono` | Red Hat Mono |
-| `text-tx-xs` … `text-tx-4xl` | 0.75rem … 2.25rem |
-
-### Usage Example
-
 ```html
-<!-- Neumorphic card using only Tailwind classes -->
-<div class="bg-tx-bg rounded-tx-lg shadow-tx-md p-tx-6 font-tx">
-  <h2 class="text-tx-text text-tx-xl font-bold">Card Title</h2>
-  <p class="text-tx-text-secondary text-tx-sm mt-tx-2">
-    Build neumorphic layouts with familiar Tailwind utilities.
-  </p>
-  <input
-    class="bg-tx-bg rounded-tx shadow-tx-inset-sm p-tx-3 mt-tx-4 w-full"
-    placeholder="Recessed input..."
-  />
-  <button class="bg-tx-bg rounded-tx shadow-tx-sm p-tx-3 mt-tx-3 font-semibold
-                  active:shadow-tx-inset-sm transition-all duration-tx">
-    Extruded Button
-  </button>
+<div class="bg-tx-surface rounded-tx-lg shadow-tx-sm p-tx-6 font-tx">
+  <h2 class="text-tx-text text-tx-xl font-bold">Title</h2>
+  <p class="text-tx-text-secondary text-tx-sm mt-tx-2">Body</p>
 </div>
 ```
 
----
-
-## Theming
-
-Every component reads CSS custom properties from `:root`. Switch themes at runtime:
-
-```js
-import { setTheme, resetTheme } from '@thundrex/web-components';
-
-setTheme('dark');
-setTheme('ocean');
-resetTheme();
-
-// Custom tokens
-setTheme({
-  bg: '#1E1E2E',
-  accent: '#CBA6F7',
-  primary: '#89B4FA',
-  text: '#CDD6F4',
-  neuDark: 'rgba(0,0,0,0.5)',
-  neuLight: 'rgba(50,50,60,0.3)',
-});
-```
-
-Or override with CSS:
-
-```css
-:root {
-  --tx-bg: #E8ECF0;
-  --tx-accent: #F3B23A;
-  --tx-primary: #4A7CFF;
-  --tx-neu-dark: rgba(174,182,196,0.18);
-  --tx-neu-light: rgba(255,255,255,0.65);
-}
-```
-
-### Design Tokens
-
-| Token | Light | Dark | Purpose |
-|---|---|---|---|
-| `--tx-bg` | `#E8ECF0` | `#141414` | Base surface |
-| `--tx-accent` | `#F3B23A` | `#F3B23A` | Accent / gold |
-| `--tx-primary` | `#4A7CFF` | `#6B9AFF` | Primary action |
-| `--tx-text` | `#1A2138` | `#E8ECF4` | Primary text |
-| `--tx-neu-dark` | `rgba(174,182,196,0.18)` | `rgba(0,0,0,0.5)` | Dark shadow |
-| `--tx-neu-light` | `rgba(255,255,255,0.65)` | `rgba(255,255,255,0.04)` | Light shadow |
-| `--tx-font` | Red Hat Text | Red Hat Text | Primary font |
-| `--tx-font-mono` | Red Hat Mono | Red Hat Mono | Code font |
-
----
-
 ## Components
 
-### `<tx-button>`
+| Component       | Description                              |
+| --------------- | ---------------------------------------- |
+| `<tx-button>`   | Button with four variants and sizes      |
+| `<tx-input>`    | Text field with label and search variant |
+| `<tx-toggle>`   | Switch toggle with ARIA support          |
+| `<tx-checkbox>` | Checkbox with animated checkmark         |
+| `<tx-slider>`   | Range input with live value readout      |
+| `<tx-card>`     | Content card with accent bar and slots   |
+| `<tx-badge>`    | Status label with color variants         |
+| `<tx-avatar>`   | User avatar with initials and status     |
+| `<tx-progress>` | Animated progress bar                    |
+| `<tx-tag>`      | Chip with optional remove button         |
+| `<tx-divider>`  | Separator with optional label            |
 
-Extruded button that recesses on press. Variants: default, primary, accent, ghost.
-
-```html
-<tx-button>Default</tx-button>
-<tx-button variant="primary">Primary</tx-button>
-<tx-button variant="accent" pill>Accent Pill</tx-button>
-<tx-button variant="ghost">Ghost</tx-button>
-```
-
-### `<tx-input>`
-
-Recessed text field with inset shadow. Focus ring uses primary color.
-
-```html
-<tx-input label="Name" placeholder="John Doe"></tx-input>
-<tx-input search placeholder="Search..."></tx-input>
-```
-
-### `<tx-toggle>`
-
-Switch with recessed track and extruded thumb.
-
-```html
-<tx-toggle label="Dark Mode" checked></tx-toggle>
-```
-
-### `<tx-checkbox>`
-
-Extruded checkbox that recesses with checkmark on check.
-
-```html
-<tx-checkbox label="Accept terms"></tx-checkbox>
-```
-
-### `<tx-slider>`
-
-Recessed track with extruded draggable thumb.
-
-```html
-<tx-slider label="Volume" show-value value="65"></tx-slider>
-```
-
-### `<tx-card>`
-
-Extruded content container. Interactive cards recess on press. Supports accent bars and header/footer slots.
-
-```html
-<tx-card accent="primary" interactive>
-  <h3 slot="header">Title</h3>
-  <p>Content</p>
-</tx-card>
-```
-
-### `<tx-badge>` `<tx-avatar>` `<tx-progress>` `<tx-tag>` `<tx-divider>`
-
-Additional UI components — see the [design system documentation](https://thundrex.github.io/web-components/) for full API reference and live demos.
-
----
-
-## How Neumorphism Works
-
-Each component uses the same base surface color (`--tx-bg`) as its background. Depth comes from two opposing shadows:
-
-```
-               Light source ↘
-  ┌──────────────────────────┐
-  │  highlight (-shadow)     │
-  │                          │
-  │      EXTRUDED            │
-  │                          │
-  │       dark shadow (+)  ↙ │
-  └──────────────────────────┘
-
-  ┌──────────────────────────┐
-  │ ↘ dark inset             │
-  │                          │
-  │      RECESSED            │
-  │                          │
-  │         highlight inset  │
-  └──────────────────────────┘
-```
-
-Shadow colors adapt per theme via `--tx-neu-dark` and `--tx-neu-light`.
+Each component has its own README in `src/components/<name>/README.md` with full API docs.
 
 ---
 
 ## Development
 
+### Prerequisites
+
+- Node.js 18+
+- npm 9+
+
+### Setup
+
 ```bash
 git clone https://github.com/thundrex/web-components.git
 cd web-components
 npm install
-npm run dev        # dev server at localhost:5173
-npm run build      # build docs site
-npm run build:lib  # build library (ES modules)
 ```
+
+### Dev Server (component playground)
+
+```bash
+npm run dev
+```
+
+### Documentation Site
+
+```bash
+npm run docs:dev       # Start dev server
+npm run docs:build     # Build for production
+npm run docs:preview   # Preview production build
+```
+
+### Build Library
+
+```bash
+npm run build:lib
+```
+
+---
+
+## Adding New Components
+
+> **Always use the generator.** Both humans and AI assistants must use this command to create new components. Do not manually create component files.
+
+```bash
+npm run generate <component-name>
+```
+
+The generator automatically:
+
+1. Creates `src/components/<name>/<name>.ts` with base Lit component and design tokens
+2. Creates `src/components/<name>/README.md` with API documentation template
+3. Creates `docs/components/<name>.md` with a VitePress docs page
+4. Updates `src/index.ts` with the barrel export
+5. Updates the VitePress sidebar
+
+Example:
+
+```bash
+npm run generate tx-tooltip
+```
+
+Then edit `src/components/tx-tooltip/tx-tooltip.ts` to build your component.
+
+---
+
+## Publishing to npm
+
+### First-time Setup
+
+```bash
+npm login
+```
+
+### Releasing
+
+Use the version scripts to bump, build, and prepare for publish:
+
+```bash
+npm run release:patch   # 1.0.0 → 1.0.1 (bug fixes)
+npm run release:minor   # 1.0.0 → 1.1.0 (new features)
+npm run release:major   # 1.0.0 → 2.0.0 (breaking changes)
+```
+
+Then publish:
+
+```bash
+npm publish --access public
+```
+
+### What Gets Published
+
+Only these files ship to npm (configured in `package.json` `files` field):
+
+- `dist-lib/` — compiled components
+- `tailwind-preset.js` — Tailwind CSS preset
+- `README.md`
+- `LICENSE`
+
+---
+
+## Design Tokens
+
+| Category   | Tokens                                           |
+| ---------- | ------------------------------------------------ |
+| Colors     | `--tx-bg`, `--tx-surface`, `--tx-primary`, `--tx-accent`, `--tx-success`, `--tx-danger` |
+| Text       | `--tx-text`, `--tx-text-secondary`, `--tx-text-muted` |
+| Shadows    | `--tx-shadow-xs` through `--tx-shadow-xl`        |
+| Spacing    | `--tx-space-1` (4px) through `--tx-space-16` (64px) |
+| Radius     | `--tx-radius-sm` (6px) through `--tx-radius-pill` |
+| Typography | `--tx-text-xs` through `--tx-text-4xl`           |
+| Fonts      | `--tx-font` (Red Hat Text), `--tx-font-mono` (Red Hat Mono) |
+
+---
 
 ## Project Structure
 
 ```
-src/
-├── components/          # 11 web components
-│   ├── tx-button.ts
-│   ├── tx-input.ts
-│   ├── tx-toggle.ts
-│   ├── tx-checkbox.ts
-│   ├── tx-slider.ts
-│   ├── tx-card.ts
-│   ├── tx-badge.ts
-│   ├── tx-avatar.ts
-│   ├── tx-progress.ts
-│   ├── tx-tag.ts
-│   └── tx-divider.ts
-├── styles/
-│   └── tx-tokens.ts     # Design tokens + neumorphic shadows
-├── theme.ts             # setTheme / resetTheme / presets
-└── index.ts             # Barrel export
-tailwind-preset.js       # Tailwind CSS preset
-index.html               # Design system docs
+web-components/
+├── src/
+│   ├── components/
+│   │   ├── tx-button/
+│   │   │   ├── tx-button.ts    # Component source
+│   │   │   └── README.md       # Component API docs
+│   │   ├── tx-input/
+│   │   └── ...
+│   ├── styles/
+│   │   └── tx-tokens.ts        # Design tokens
+│   ├── theme.ts                # Theme engine
+│   └── index.ts                # Barrel exports
+├── docs/                       # VitePress documentation
+│   ├── .vitepress/
+│   │   ├── config.ts           # Site config & sidebar
+│   │   └── theme/              # Custom theme
+│   ├── guide/                  # Foundation docs
+│   └── components/             # Component docs (auto-includes README)
+├── scripts/
+│   └── generate-component.mjs  # Component generator
+├── tailwind-preset.js          # Tailwind CSS preset
+└── package.json
 ```
-
-## Browser Support
-
-Chrome/Edge 79+ · Firefox 63+ · Safari 13.1+
 
 ## License
 
-MIT — [thundrex](https://github.com/thundrex)
+MIT

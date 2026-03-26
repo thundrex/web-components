@@ -1,0 +1,146 @@
+:root {
+  --vp-font-family-base: 'Red Hat Text', 'Chinese Quotes', 'Inter var',
+    'Inter', ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
+    'Segoe UI', Roboto, 'Helvetica Neue', Helvetica, Arial, 'Noto Sans',
+    sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol',
+    'Noto Color Emoji';
+  --vp-font-family-mono: 'Red Hat Mono', ui-monospace, SFMono-Regular, 'SF Mono',
+    Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
+
+  --vp-c-brand-1: #4A7CFF;
+  --vp-c-brand-2: #6B9AFF;
+  --vp-c-brand-3: #4A7CFF;
+  --vp-c-brand-soft: rgba(74, 124, 255, 0.14);
+}
+
+.demo-panel {
+  background: var(--vp-c-bg-soft);
+  border: 1px solid var(--vp-c-divider);
+  border-radius: 8px;
+  padding: 24px;
+  margin: 16px 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: center;
+}
+
+.demo-panel[data-direction="column"] {
+  flex-direction: column;
+  align-items: stretch;
+}
+
+.demo-grid {
+  background: var(--vp-c-bg-soft);
+  border: 1px solid var(--vp-c-divider);
+  border-radius: 8px;
+  padding: 24px;
+  margin: 16px 0;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+@media (max-width: 640px) {
+  .demo-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.demo-panel-bg {
+  background: var(--vp-c-bg-alt);
+  border: 1px solid var(--vp-c-divider);
+  border-radius: 8px;
+  padding: 24px;
+  margin: 16px 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.token-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 12px;
+  margin: 16px 0;
+}
+
+.swatch {
+  background: var(--vp-c-bg);
+  border-radius: 8px;
+  padding: 14px;
+  border: 1px solid var(--vp-c-divider);
+  text-align: center;
+}
+
+.swatch .dot {
+  width: 32px;
+  height: 32px;
+  border-radius: 6px;
+  margin: 0 auto 8px;
+  border: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+.swatch .name {
+  font-family: var(--vp-font-family-mono);
+  font-size: 0.7rem;
+  color: var(--vp-c-text-3);
+}
+
+.swatch .val {
+  font-weight: 600;
+  font-size: 0.8rem;
+  color: var(--vp-c-text-1);
+  margin-top: 2px;
+}
+
+.spacing-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 4px 0;
+}
+
+.spacing-bar {
+  height: 6px;
+  border-radius: 3px;
+  background: var(--vp-c-brand-1);
+  opacity: 0.35;
+}
+
+.spacing-label {
+  flex-shrink: 0;
+  width: 52px;
+  font-family: var(--vp-font-family-mono);
+  font-size: 0.75rem;
+  color: var(--vp-c-text-3);
+}
+
+.spacing-val {
+  font-family: var(--vp-font-family-mono);
+  font-size: 0.75rem;
+  color: var(--vp-c-text-2);
+}
+
+.shadow-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+  gap: 14px;
+  margin: 16px 0;
+}
+
+.shadow-swatch {
+  aspect-ratio: 1;
+  border-radius: 10px;
+  background: var(--vp-c-bg);
+  border: 1px solid var(--vp-c-divider);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.shadow-swatch .name {
+  font-family: var(--vp-font-family-mono);
+  font-size: 0.7rem;
+  color: var(--vp-c-text-3);
+}

@@ -11,54 +11,42 @@ if (typeof document !== 'undefined' && !document.getElementById('tx-defaults')) 
   style.textContent = `
     :root {
       /* ── Surface ── */
-      --tx-bg: #E8ECF0;
-      --tx-surface: #E8ECF0;
-      --tx-surface-alt: #DFE3E8;
+      --tx-bg: #F5F6FA;
+      --tx-surface: #FFFFFF;
+      --tx-surface-alt: #F8F9FC;
 
       /* ── Palette ── */
       --tx-accent: #F3B23A;
-      --tx-accent-soft: rgba(243, 178, 58, 0.12);
+      --tx-accent-soft: rgba(243, 178, 58, 0.10);
       --tx-primary: #4A7CFF;
-      --tx-primary-soft: rgba(74, 124, 255, 0.10);
-      --tx-success: #34C759;
-      --tx-success-soft: rgba(52, 199, 89, 0.10);
-      --tx-danger: #FF3B30;
-      --tx-danger-soft: rgba(255, 59, 48, 0.10);
+      --tx-primary-soft: rgba(74, 124, 255, 0.08);
+      --tx-success: #22C55E;
+      --tx-success-soft: rgba(34, 197, 94, 0.08);
+      --tx-danger: #EF4444;
+      --tx-danger-soft: rgba(239, 68, 68, 0.08);
 
       /* ── Text ── */
-      --tx-text: #1A2138;
-      --tx-text-secondary: #4D5B6A;
-      --tx-text-muted: #6B7886;
+      --tx-text: #111827;
+      --tx-text-secondary: #4B5563;
+      --tx-text-muted: #9CA3AF;
 
       /* ── Border ── */
-      --tx-border: rgba(0, 0, 0, 0.06);
+      --tx-border: #E5E7EB;
       --tx-border-focus: var(--tx-primary);
 
-      /* ── Neumorphic shadows ── */
-      --tx-neu-dark: rgba(174,182,196,0.18);
-      --tx-neu-light: rgba(255,255,255,0.65);
-
-      --tx-shadow-sm:
-        2px 2px 5px var(--tx-neu-dark),
-        -2px -2px 5px var(--tx-neu-light);
-      --tx-shadow-md:
-        4px 4px 8px var(--tx-neu-dark),
-        -4px -4px 8px var(--tx-neu-light);
-      --tx-shadow-lg:
-        6px 6px 14px var(--tx-neu-dark),
-        -6px -6px 14px var(--tx-neu-light);
-      --tx-shadow-inset:
-        inset 2px 2px 5px var(--tx-neu-dark),
-        inset -2px -2px 5px var(--tx-neu-light);
-      --tx-shadow-inset-sm:
-        inset 1px 1px 3px var(--tx-neu-dark),
-        inset -1px -1px 3px var(--tx-neu-light);
+      /* ── Shadows ── */
+      --tx-shadow-xs: 0 1px 2px rgba(0,0,0,0.05);
+      --tx-shadow-sm: 0 1px 3px rgba(0,0,0,0.08), 0 1px 2px rgba(0,0,0,0.04);
+      --tx-shadow-md: 0 4px 6px rgba(0,0,0,0.06), 0 2px 4px rgba(0,0,0,0.04);
+      --tx-shadow-lg: 0 10px 15px rgba(0,0,0,0.06), 0 4px 6px rgba(0,0,0,0.03);
+      --tx-shadow-xl: 0 20px 25px rgba(0,0,0,0.07), 0 8px 10px rgba(0,0,0,0.03);
+      --tx-ring-focus: 0 0 0 3px var(--tx-primary-soft);
 
       /* ── Radius ── */
-      --tx-radius-sm: 8px;
-      --tx-radius: 12px;
-      --tx-radius-lg: 16px;
-      --tx-radius-xl: 20px;
+      --tx-radius-sm: 6px;
+      --tx-radius: 8px;
+      --tx-radius-lg: 12px;
+      --tx-radius-xl: 16px;
       --tx-radius-pill: 999px;
 
       /* ── Spacing ── */
@@ -84,8 +72,8 @@ if (typeof document !== 'undefined' && !document.getElementById('tx-defaults')) 
       --tx-text-4xl: 2.25rem;
 
       /* ── Motion ── */
-      --tx-transition: all 0.2s ease;
-      --tx-transition-slow: all 0.3s ease;
+      --tx-transition: all 0.15s ease;
+      --tx-transition-slow: all 0.25s ease;
 
       /* ── Font ── */
       --tx-font: 'Red Hat Text', system-ui, -apple-system, sans-serif;
@@ -95,7 +83,6 @@ if (typeof document !== 'undefined' && !document.getElementById('tx-defaults')) 
   document.head.prepend(style);
 }
 
-/** Shared host styles — only layout/font, no token re-declarations */
 export const txTokens = css`
   :host {
     font-family: var(--tx-font);

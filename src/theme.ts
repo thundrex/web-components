@@ -9,49 +9,41 @@ export interface TxTheme {
   textMuted?: string;
   border?: string;
   radius?: string;
-  neuDark?: string;
-  neuLight?: string;
 }
 
 export const themes: Record<string, TxTheme> = {
   light: {
-    bg: '#E8ECF0',
-    surface: '#E8ECF0',
-    surfaceAlt: '#DFE3E8',
+    bg: '#F5F6FA',
+    surface: '#FFFFFF',
+    surfaceAlt: '#F8F9FC',
     accent: '#F3B23A',
     primary: '#4A7CFF',
-    text: '#1A2138',
-    textSecondary: '#4D5B6A',
-    textMuted: '#6B7886',
-    border: 'rgba(0, 0, 0, 0.06)',
-    neuDark: 'rgba(174,182,196,0.18)',
-    neuLight: 'rgba(255,255,255,0.65)',
+    text: '#111827',
+    textSecondary: '#4B5563',
+    textMuted: '#9CA3AF',
+    border: '#E5E7EB',
   },
   dark: {
-    bg: '#141414',
-    surface: '#141414',
-    surfaceAlt: '#0C0C0C',
+    bg: '#0F1117',
+    surface: '#1A1D2B',
+    surfaceAlt: '#242737',
     accent: '#F3B23A',
     primary: '#6B9AFF',
-    text: '#E8ECF4',
-    textSecondary: '#A0A8B4',
-    textMuted: '#6E7A88',
-    border: 'rgba(255, 255, 255, 0.06)',
-    neuDark: 'rgba(0,0,0,0.5)',
-    neuLight: 'rgba(255,255,255,0.04)',
+    text: '#F3F4F6',
+    textSecondary: '#9CA3AF',
+    textMuted: '#6B7280',
+    border: '#2D3142',
   },
   ocean: {
-    bg: '#E2EBF0',
-    surface: '#E2EBF0',
-    surfaceAlt: '#D6DFE8',
+    bg: '#F0F7FF',
+    surface: '#FFFFFF',
+    surfaceAlt: '#F0F7FF',
     accent: '#0EA5E9',
     primary: '#0284C7',
     text: '#0C2340',
     textSecondary: '#3D5A74',
-    textMuted: '#567390',
-    border: 'rgba(0, 0, 0, 0.06)',
-    neuDark: 'rgba(160,175,190,0.22)',
-    neuLight: 'rgba(255,255,255,0.68)',
+    textMuted: '#94A3B8',
+    border: '#E0EAFF',
   },
 };
 
@@ -66,8 +58,6 @@ const tokenMap: Record<keyof TxTheme, string> = {
   textMuted: '--tx-text-muted',
   border: '--tx-border',
   radius: '--tx-radius',
-  neuDark: '--tx-neu-dark',
-  neuLight: '--tx-neu-light',
 };
 
 export function setTheme(themeOrName: string | TxTheme, root: HTMLElement = document.documentElement): void {

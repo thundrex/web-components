@@ -1,9 +1,9 @@
 import { LitElement, html, css } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
-import { txTokens } from '../styles/tx-tokens.js';
+import { txTokens } from '../../styles/tx-tokens.js';
 
-@customElement('tx-checkbox')
-export class TxCheckbox extends LitElement {
+@customElement('tx-toggle')
+export class TxToggle extends LitElement {
   static override styles = [
     txTokens,
     css`
@@ -13,57 +13,44 @@ export class TxCheckbox extends LitElement {
         gap: 10px;
       }
 
-      .box {
+      .track {
         position: relative;
-        width: 22px;
+        width: 40px;
         height: 22px;
-        background: var(--tx-bg);
-        border-radius: 7px;
-        border: none;
-        box-shadow: var(--tx-shadow-sm);
+        background: #D1D5DB;
+        border-radius: var(--tx-radius-pill);
         cursor: pointer;
         transition: var(--tx-transition);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        flex-shrink: 0;
         -webkit-tap-highlight-color: transparent;
       }
 
-      :host([checked]) .box {
+      :host([checked]) .track {
         background: var(--tx-primary);
-        box-shadow: inset 1px 1px 3px rgba(0,0,0,0.15), inset -1px -1px 3px rgba(255,255,255,0.08);
       }
 
-      .checkmark {
-        width: 12px;
-        height: 12px;
-        opacity: 0;
-        transform: scale(0.5);
+      .thumb {
+        position: absolute;
+        top: 2px;
+        left: 2px;
+        width: 18px;
+        height: 18px;
+        border-radius: 50%;
+        background: #fff;
+        box-shadow: var(--tx-shadow-xs);
         transition: var(--tx-transition);
       }
 
-      .checkmark svg {
-        width: 100%;
-        height: 100%;
+      :host([checked]) .thumb {
+        left: 20px;
       }
 
-      :host([checked]) .checkmark {
-        opacity: 1;
-        transform: scale(1);
-      }
-
-      .box:hover {
-        border-color: var(--tx-primary);
-      }
-
-      .box:focus-visible {
+      .track:focus-visible {
         outline: 2px solid var(--tx-primary);
-        outline-offset: 3px;
+        outline-offset: 2px;
       }
 
       .label {
-        font-size: 0.875rem;
+        font-size: var(--tx-text-sm);
         font-weight: 500;
         color: var(--tx-text);
         user-select: none;
@@ -83,18 +70,14 @@ export class TxCheckbox extends LitElement {
   override render() {
     return html`
       <div
-        class="box"
-        role="checkbox"
+        class="track"
+        role="switch"
         tabindex="0"
         aria-checked=${this.checked}
         @click=${this._toggle}
         @keydown=${(e: KeyboardEvent) => { if (e.key === ' ' || e.key === 'Enter') { e.preventDefault(); this._toggle(); } }}
       >
-        <span class="checkmark">
-          <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round">
-            <polyline points="4 12 10 18 20 6"></polyline>
-          </svg>
-        </span>
+        <div class="thumb"></div>
       </div>
       ${this.label ? html`<span class="label" @click=${this._toggle}>${this.label}</span>` : ''}
     `;
@@ -103,6 +86,6 @@ export class TxCheckbox extends LitElement {
 
 declare global {
   interface HTMLElementTagNameMap {
-    'tx-checkbox': TxCheckbox;
+    'tx-toggle': TxToggle;
   }
 }

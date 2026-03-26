@@ -1,6 +1,6 @@
 import { LitElement, html, css } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
-import { txTokens } from '../styles/tx-tokens.js';
+import { txTokens } from '../../styles/tx-tokens.js';
 
 @customElement('tx-input')
 export class TxInput extends LitElement {
@@ -18,11 +18,10 @@ export class TxInput extends LitElement {
       }
 
       label {
-        font-size: 0.78rem;
+        font-size: var(--tx-text-xs);
         font-weight: 600;
         color: var(--tx-text-secondary);
-        letter-spacing: 0.02em;
-        padding-left: 2px;
+        letter-spacing: 0.01em;
       }
 
       .field {
@@ -34,15 +33,13 @@ export class TxInput extends LitElement {
       input {
         all: unset;
         width: 100%;
-        padding: 10px 14px;
-        background: var(--tx-bg);
+        padding: 8px 12px;
+        background: var(--tx-surface);
         color: var(--tx-text);
         font-family: var(--tx-font);
-        font-size: 0.9rem;
-        font-weight: 400;
+        font-size: var(--tx-text-sm);
         border-radius: var(--tx-radius);
-        border: none;
-        box-shadow: var(--tx-shadow-inset);
+        border: 1px solid var(--tx-border);
         transition: var(--tx-transition);
       }
 
@@ -51,20 +48,20 @@ export class TxInput extends LitElement {
       }
 
       input:hover {
-        box-shadow: var(--tx-shadow-inset), 0 0 0 1px rgba(0,0,0,0.04);
+        border-color: #D1D5DB;
       }
 
       input:focus {
-        box-shadow: var(--tx-shadow-inset), 0 0 0 2px var(--tx-primary);
+        border-color: var(--tx-border-focus);
+        box-shadow: var(--tx-ring-focus);
       }
 
-      /* ── Search variant ── */
       :host([search]) .field::before {
         content: '';
         position: absolute;
-        left: 14px;
-        width: 14px;
-        height: 14px;
+        left: 12px;
+        width: 13px;
+        height: 13px;
         border: 2px solid var(--tx-text-muted);
         border-radius: 50%;
         pointer-events: none;
@@ -73,17 +70,17 @@ export class TxInput extends LitElement {
       :host([search]) .field::after {
         content: '';
         position: absolute;
-        left: 26px;
+        left: 23px;
         top: calc(50% + 4px);
         width: 2px;
-        height: 6px;
+        height: 5px;
         background: var(--tx-text-muted);
         transform: rotate(-45deg);
         pointer-events: none;
       }
 
       :host([search]) input {
-        padding-left: 40px;
+        padding-left: 36px;
       }
     `,
   ];

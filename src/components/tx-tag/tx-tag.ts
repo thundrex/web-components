@@ -1,6 +1,6 @@
 import { LitElement, html, css } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
-import { txTokens } from '../styles/tx-tokens.js';
+import { txTokens } from '../../styles/tx-tokens.js';
 
 @customElement('tx-tag')
 export class TxTag extends LitElement {
@@ -15,23 +15,22 @@ export class TxTag extends LitElement {
         display: inline-flex;
         align-items: center;
         gap: 6px;
-        padding: 5px 12px;
+        padding: 4px 10px;
         font-family: var(--tx-font);
-        font-size: 0.82rem;
+        font-size: var(--tx-text-xs);
         font-weight: 500;
-        border-radius: var(--tx-radius);
-        background: var(--tx-bg);
+        border-radius: var(--tx-radius-sm);
+        background: var(--tx-surface);
         color: var(--tx-text);
-        border: none;
-        box-shadow: var(--tx-shadow-sm);
+        border: 1px solid var(--tx-border);
         transition: var(--tx-transition);
         white-space: nowrap;
       }
 
-      :host([color='primary']) .tag { background: var(--tx-primary-soft); color: var(--tx-primary); border-color: transparent; }
-      :host([color='accent']) .tag  { background: var(--tx-accent-soft); color: #C48A1A; border-color: transparent; }
-      :host([color='success']) .tag { background: var(--tx-success-soft); color: #1E8E3E; border-color: transparent; }
-      :host([color='danger']) .tag  { background: var(--tx-danger-soft); color: #D32F2F; border-color: transparent; }
+      :host([color='primary']) .tag { background: var(--tx-primary-soft); color: #3B63CC; border-color: transparent; }
+      :host([color='accent']) .tag  { background: var(--tx-accent-soft); color: #B8891E; border-color: transparent; }
+      :host([color='success']) .tag { background: var(--tx-success-soft); color: #16803C; border-color: transparent; }
+      :host([color='danger']) .tag  { background: var(--tx-danger-soft); color: #DC2626; border-color: transparent; }
 
       .close {
         all: unset;
@@ -39,10 +38,10 @@ export class TxTag extends LitElement {
         display: flex;
         align-items: center;
         justify-content: center;
-        width: 16px;
-        height: 16px;
+        width: 14px;
+        height: 14px;
         border-radius: 50%;
-        font-size: 0.7rem;
+        font-size: 0.65rem;
         line-height: 1;
         color: currentColor;
         opacity: 0.5;
@@ -51,7 +50,7 @@ export class TxTag extends LitElement {
 
       .close:hover {
         opacity: 1;
-        background: rgba(0, 0, 0, 0.08);
+        background: rgba(0, 0, 0, 0.06);
       }
 
       .close svg {
@@ -60,9 +59,8 @@ export class TxTag extends LitElement {
       }
 
       :host([size='sm']) .tag {
-        padding: 3px 8px;
-        font-size: 0.75rem;
-        border-radius: var(--tx-radius-sm);
+        padding: 2px 6px;
+        font-size: 0.7rem;
       }
     `,
   ];

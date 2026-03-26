@@ -1,0 +1,22 @@
+---
+description: Always use the component generator when creating new components
+alwaysApply: true
+---
+
+# Component Generator Rule
+
+When adding a new component to the thundrex library:
+
+- **ALWAYS** run `npm run generate <component-name>` before implementing a new component
+- **NEVER** manually create component files in `src/components/`
+- **NEVER** manually update `src/index.ts` exports for new components
+- **NEVER** manually create docs pages in `docs/components/`
+
+The generator (`scripts/generate-component.mjs`) handles all wiring:
+1. Component file with base CSS and design tokens
+2. Component README with API template
+3. VitePress docs page
+4. Barrel export in `src/index.ts`
+5. Sidebar entry in `docs/.vitepress/config.ts`
+
+After running the generator, edit `src/components/<name>/<name>.ts` to implement the component.

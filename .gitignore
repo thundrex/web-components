@@ -1,4 +1,6 @@
 node_modules
 dist
 dist-lib
+docs/.vitepress/dist
+docs/.vitepress/cache
 *.local

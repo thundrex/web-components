@@ -43,11 +43,12 @@ export default {
       },
 
       boxShadow: {
+        'tx-xs': 'var(--tx-shadow-xs)',
         'tx-sm': 'var(--tx-shadow-sm)',
         'tx-md': 'var(--tx-shadow-md)',
         'tx-lg': 'var(--tx-shadow-lg)',
-        'tx-inset': 'var(--tx-shadow-inset)',
-        'tx-inset-sm': 'var(--tx-shadow-inset-sm)',
+        'tx-xl': 'var(--tx-shadow-xl)',
+        'tx-ring': 'var(--tx-ring-focus)',
       },
 
       fontFamily: {
@@ -79,13 +80,9 @@ export default {
         'tx-16': 'var(--tx-space-16)',
       },
 
-      transitionProperty: {
-        tx: 'all',
-      },
-
       transitionDuration: {
-        tx: '200ms',
-        'tx-slow': '300ms',
+        tx: '150ms',
+        'tx-slow': '250ms',
       },
     },
   },
