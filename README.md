@@ -1,5 +1,12 @@
 # @thundrex/web-components
 
+[![npm version](https://img.shields.io/npm/v/@thundrex/web-components?color=4A7CFF&label=npm)](https://www.npmjs.com/package/@thundrex/web-components)
+[![GitHub Actions](https://img.shields.io/github/actions/workflow/status/thundrex/web-components/deploy.yml?branch=main&label=deploy&color=22C55E)](https://github.com/thundrex/web-components/actions)
+[![License](https://img.shields.io/github/license/thundrex/web-components?color=F3B23A)](https://github.com/thundrex/web-components/blob/main/LICENSE)
+[![Lit](https://img.shields.io/badge/built_with-Lit-324FFF?logo=lit)](https://lit.dev)
+[![Tailwind CSS](https://img.shields.io/badge/preset-Tailwind_CSS-06B6D4?logo=tailwindcss&logoColor=white)](https://tailwindcss.com)
+[![Docs](https://img.shields.io/badge/docs-GitHub_Pages-4A7CFF)](https://thundrex.github.io/web-components/)
+
 A clean, accessible design system and web component library built with [Lit](https://lit.dev). Themeable, framework-agnostic, and ships with a Tailwind CSS preset.
 
 [Documentation](https://thundrex.github.io/web-components/) · [GitHub](https://github.com/thundrex/web-components)
