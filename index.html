@@ -1,0 +1,781 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ThunderX — Neumorphic Component Library</title>
+  <meta name="description" content="A lightweight Neumorphic (Soft UI) web component library built with Lit." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #E2E6EE;
+      --accent: #F3B23A;
+      --text: #6B7A8D;
+      --text-muted: #9BA7B4;
+      --code-bg: #d6dbe4;
+      --sidebar-w: 240px;
+      --light: rgba(255,255,255,0.8);
+      --dark: rgba(184,197,214,0.6);
+    }
+
+    html { scroll-behavior: smooth; scroll-padding-top: 32px; }
+
+    body {
+      background: var(--bg);
+      font-family: 'Inter', system-ui, sans-serif;
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    /* ── Sidebar ── */
+    .sidebar {
+      position: fixed;
+      top: 0; left: 0;
+      width: var(--sidebar-w);
+      height: 100vh;
+      padding: 32px 20px;
+      overflow-y: auto;
+      z-index: 100;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .sidebar-brand {
+      font-size: 1.35rem;
+      font-weight: 900;
+      color: var(--accent);
+      letter-spacing: -0.03em;
+      margin-bottom: 4px;
+      text-decoration: none;
+    }
+
+    .sidebar-brand span { color: var(--text); font-weight: 600; }
+
+    .sidebar-sub {
+      font-size: 0.7rem;
+      color: var(--text-muted);
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 20px;
+    }
+
+    .sidebar-section {
+      font-size: 0.65rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--text-muted);
+      margin-top: 16px;
+      margin-bottom: 6px;
+      padding-left: 12px;
+    }
+
+    .sidebar a {
+      display: block;
+      padding: 8px 12px;
+      border-radius: 10px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--text);
+      text-decoration: none;
+      transition: all 0.15s ease;
+    }
+
+    .sidebar a:hover, .sidebar a.active {
+      background: rgba(184,197,214,0.25);
+      color: var(--accent);
+    }
+
+    .sidebar-footer {
+      margin-top: auto;
+      padding-top: 20px;
+    }
+
+    .sidebar-footer a {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    /* ── Main ── */
+    .main {
+      margin-left: var(--sidebar-w);
+      padding: 40px 48px 100px;
+      max-width: 920px;
+    }
+
+    /* ── Hero ── */
+    .hero {
+      margin-bottom: 56px;
+    }
+
+    .hero h1 {
+      font-size: 2.8rem;
+      font-weight: 900;
+      color: var(--accent);
+      letter-spacing: -0.03em;
+      line-height: 1.1;
+    }
+
+    .hero h1 span { color: var(--text); }
+
+    .hero .tagline {
+      font-size: 1.1rem;
+      color: var(--text-muted);
+      font-weight: 500;
+      margin-top: 12px;
+      max-width: 480px;
+    }
+
+    .hero .install-box {
+      margin-top: 24px;
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      background: var(--bg);
+      border-radius: 14px;
+      padding: 14px 20px;
+      box-shadow:
+        inset -6px -6px 12px var(--light),
+        inset 6px 6px 12px var(--dark);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.9rem;
+      color: var(--text);
+    }
+
+    .install-box .dollar { color: var(--accent); font-weight: 700; user-select: none; }
+
+    .copy-btn {
+      all: unset;
+      cursor: pointer;
+      padding: 6px;
+      border-radius: 6px;
+      color: var(--text-muted);
+      transition: all 0.15s;
+    }
+    .copy-btn:hover { color: var(--accent); }
+
+    /* ── Sections ── */
+    .doc-section {
+      margin-bottom: 64px;
+    }
+
+    .doc-section > h2 {
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: var(--accent);
+      letter-spacing: -0.01em;
+      margin-bottom: 8px;
+    }
+
+    .doc-section > .desc {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      margin-bottom: 28px;
+      max-width: 560px;
+    }
+
+    /* ── Demo panel ── */
+    .demo-block {
+      margin-bottom: 32px;
+    }
+
+    .demo-block h3 {
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--text-muted);
+      margin-bottom: 12px;
+    }
+
+    .demo-panel {
+      background: var(--bg);
+      border-radius: 20px;
+      padding: 32px;
+      box-shadow:
+        -6px -6px 12px var(--light),
+        6px 6px 12px var(--dark);
+    }
+
+    .demo-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      align-items: center;
+    }
+
+    .demo-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+
+    .demo-stack {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    /* ── Code block ── */
+    .code-block {
+      position: relative;
+      margin-top: 16px;
+      border-radius: 14px;
+      overflow: hidden;
+    }
+
+    .code-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 16px;
+      background: #cdd3de;
+      border-radius: 14px 14px 0 0;
+    }
+
+    .code-header span {
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--text-muted);
+    }
+
+    .code-header button {
+      all: unset;
+      cursor: pointer;
+      font-size: 0.7rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      padding: 4px 10px;
+      border-radius: 6px;
+      transition: all 0.15s;
+    }
+
+    .code-header button:hover { color: var(--accent); }
+
+    pre {
+      margin: 0;
+      padding: 16px 20px;
+      background: var(--code-bg);
+      overflow-x: auto;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.82rem;
+      line-height: 1.7;
+      color: var(--text);
+      border-radius: 0 0 14px 14px;
+    }
+
+    pre .tag { color: #c06030; }
+    pre .attr { color: #7c6eb0; }
+    pre .val { color: #2e8b57; }
+    pre .comment { color: var(--text-muted); font-style: italic; }
+
+    /* ── API Table ── */
+    .api-table {
+      width: 100%;
+      border-collapse: separate;
+      border-spacing: 0;
+      margin-top: 20px;
+      font-size: 0.85rem;
+      border-radius: 14px;
+      overflow: hidden;
+      box-shadow:
+        inset -4px -4px 8px var(--light),
+        inset 4px 4px 8px var(--dark);
+    }
+
+    .api-table th {
+      text-align: left;
+      padding: 12px 16px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--text-muted);
+      background: rgba(184,197,214,0.15);
+    }
+
+    .api-table td {
+      padding: 10px 16px;
+      border-top: 1px solid rgba(184,197,214,0.2);
+      vertical-align: top;
+    }
+
+    .api-table code {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.8rem;
+      background: var(--code-bg);
+      padding: 2px 6px;
+      border-radius: 4px;
+      color: #c06030;
+    }
+
+    .api-table .type-col {
+      color: var(--text-muted);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.78rem;
+    }
+
+    /* ── Tokens grid ── */
+    .token-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 16px;
+      margin-top: 20px;
+    }
+
+    .token-swatch {
+      background: var(--bg);
+      border-radius: 16px;
+      padding: 20px;
+      box-shadow:
+        -4px -4px 8px var(--light),
+        4px 4px 8px var(--dark);
+      text-align: center;
+    }
+
+    .token-swatch .color-dot {
+      width: 40px; height: 40px;
+      border-radius: 50%;
+      margin: 0 auto 10px;
+      box-shadow:
+        inset -3px -3px 6px var(--light),
+        inset 3px 3px 6px var(--dark);
+    }
+
+    .token-swatch .name {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.75rem;
+      color: var(--text-muted);
+    }
+
+    .token-swatch .value {
+      font-weight: 700;
+      font-size: 0.85rem;
+      color: var(--text);
+      margin-top: 2px;
+    }
+
+    /* ── Mobile ── */
+    @media (max-width: 800px) {
+      .sidebar { display: none; }
+      .main { margin-left: 0; padding: 24px 20px 80px; }
+      .hero h1 { font-size: 2rem; }
+      .demo-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+  <script type="module" src="/src/index.ts"></script>
+</head>
+<body>
+
+<!-- ─── Sidebar ─── -->
+<nav class="sidebar">
+  <a href="#top" class="sidebar-brand">Thunder<span>X</span></a>
+  <div class="sidebar-sub">Neumorphic Components</div>
+
+  <div class="sidebar-section">Getting Started</div>
+  <a href="#install">Installation</a>
+  <a href="#tokens">Design Tokens</a>
+
+  <div class="sidebar-section">Components</div>
+  <a href="#buttons">Button</a>
+  <a href="#inputs">Input</a>
+  <a href="#toggles">Toggle</a>
+  <a href="#checkboxes">Checkbox</a>
+  <a href="#sliders">Slider</a>
+  <a href="#cards">Card</a>
+
+  <div class="sidebar-footer">
+    <a href="https://github.com/thundrex/web-components" target="_blank">GitHub</a>
+  </div>
+</nav>
+
+<!-- ─── Main content ─── -->
+<main class="main" id="top">
+
+  <!-- Hero -->
+  <header class="hero">
+    <h1>Thunder<span>X</span></h1>
+    <p class="tagline">A lightweight Neumorphic (Soft UI) component library built with Lit web components. Drop them into any framework or vanilla HTML.</p>
+    <div class="install-box" id="install">
+      <span class="dollar">$</span>
+      <span>npm install thunderx</span>
+      <button class="copy-btn" onclick="navigator.clipboard.writeText('npm install thunderx');this.textContent='Copied!';setTimeout(()=>this.textContent='Copy',1500)" aria-label="Copy install command">Copy</button>
+    </div>
+  </header>
+
+  <!-- ═══ Design Tokens ═══ -->
+  <section class="doc-section" id="tokens">
+    <h2>Design Tokens</h2>
+    <p class="desc">The visual foundation. Every component shares these CSS custom properties, ensuring a consistent neumorphic surface.</p>
+
+    <div class="token-grid">
+      <div class="token-swatch">
+        <div class="color-dot" style="background: #E2E6EE;"></div>
+        <div class="name">--neu-bg</div>
+        <div class="value">#E2E6EE</div>
+      </div>
+      <div class="token-swatch">
+        <div class="color-dot" style="background: #F3B23A;"></div>
+        <div class="name">--neu-accent</div>
+        <div class="value">#F3B23A</div>
+      </div>
+      <div class="token-swatch">
+        <div class="color-dot" style="background: #6B7A8D;"></div>
+        <div class="name">--neu-text</div>
+        <div class="value">#6B7A8D</div>
+      </div>
+      <div class="token-swatch">
+        <div class="color-dot" style="background: #9BA7B4;"></div>
+        <div class="name">--neu-text-muted</div>
+        <div class="value">#9BA7B4</div>
+      </div>
+    </div>
+
+    <div class="demo-block" style="margin-top: 28px;">
+      <h3>Shadow Presets</h3>
+      <div class="demo-panel">
+        <div class="demo-row" style="gap: 32px; justify-content: center;">
+          <div style="text-align: center;">
+            <div style="width:80px;height:80px;border-radius:16px;background:var(--bg);box-shadow:-6px -6px 12px rgba(255,255,255,0.8),6px 6px 12px rgba(184,197,214,0.6);margin:0 auto 12px;"></div>
+            <span style="font-size:0.75rem;font-weight:700;color:var(--text-muted);">Extruded</span>
+          </div>
+          <div style="text-align: center;">
+            <div style="width:80px;height:80px;border-radius:16px;background:var(--bg);box-shadow:inset -6px -6px 12px rgba(255,255,255,0.8),inset 6px 6px 12px rgba(184,197,214,0.6);margin:0 auto 12px;"></div>
+            <span style="font-size:0.75rem;font-weight:700;color:var(--text-muted);">Recessed</span>
+          </div>
+          <div style="text-align: center;">
+            <div style="width:80px;height:80px;border-radius:16px;background:var(--bg);box-shadow:-8px -8px 16px rgba(255,255,255,0.8),8px 8px 16px rgba(184,197,214,0.6);margin:0 auto 12px;"></div>
+            <span style="font-size:0.75rem;font-weight:700;color:var(--text-muted);">Hover</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ Button ═══ -->
+  <section class="doc-section" id="buttons">
+    <h2>Button</h2>
+    <p class="desc">Extruded by default, lifts on hover, and presses inward on click. Supports multiple sizes, pill shape, icon-only, and disabled state.</p>
+
+    <div class="demo-block">
+      <h3>Variants</h3>
+      <div class="demo-panel">
+        <div class="demo-row">
+          <neu-button>Default</neu-button>
+          <neu-button size="sm">Small</neu-button>
+          <neu-button size="lg">Large</neu-button>
+          <neu-button pill>Pill</neu-button>
+          <neu-button disabled>Disabled</neu-button>
+          <neu-button icon-only>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#F3B23A" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+          </neu-button>
+        </div>
+      </div>
+      <div class="code-block">
+        <div class="code-header"><span>HTML</span><button onclick="navigator.clipboard.writeText(this.closest('.code-block').querySelector('pre').textContent)">Copy</button></div>
+<pre><span class="tag">&lt;neu-button&gt;</span>Default<span class="tag">&lt;/neu-button&gt;</span>
+<span class="tag">&lt;neu-button</span> <span class="attr">size</span>=<span class="val">"sm"</span><span class="tag">&gt;</span>Small<span class="tag">&lt;/neu-button&gt;</span>
+<span class="tag">&lt;neu-button</span> <span class="attr">size</span>=<span class="val">"lg"</span><span class="tag">&gt;</span>Large<span class="tag">&lt;/neu-button&gt;</span>
+<span class="tag">&lt;neu-button</span> <span class="attr">pill</span><span class="tag">&gt;</span>Pill<span class="tag">&lt;/neu-button&gt;</span>
+<span class="tag">&lt;neu-button</span> <span class="attr">disabled</span><span class="tag">&gt;</span>Disabled<span class="tag">&lt;/neu-button&gt;</span>
+<span class="tag">&lt;neu-button</span> <span class="attr">icon-only</span><span class="tag">&gt;</span>...<span class="tag">&lt;/neu-button&gt;</span></pre>
+      </div>
+    </div>
+
+    <div class="demo-block">
+      <h3>API</h3>
+      <table class="api-table">
+        <thead><tr><th>Property</th><th>Type</th><th>Default</th><th>Description</th></tr></thead>
+        <tbody>
+          <tr><td><code>size</code></td><td class="type-col">'sm' | 'md' | 'lg'</td><td><code>'md'</code></td><td>Button size variant</td></tr>
+          <tr><td><code>pill</code></td><td class="type-col">boolean</td><td><code>false</code></td><td>Fully rounded corners</td></tr>
+          <tr><td><code>icon-only</code></td><td class="type-col">boolean</td><td><code>false</code></td><td>Circular button for icons</td></tr>
+          <tr><td><code>disabled</code></td><td class="type-col">boolean</td><td><code>false</code></td><td>Disables interaction</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- ═══ Input ═══ -->
+  <section class="doc-section" id="inputs">
+    <h2>Input</h2>
+    <p class="desc">Form inputs default to the recessed (inset) neumorphic look. Includes text fields, email, and a search variant with a magnifying-glass icon.</p>
+
+    <div class="demo-block">
+      <h3>Text Fields</h3>
+      <div class="demo-panel">
+        <div class="demo-grid">
+          <neu-input label="Full Name" placeholder="John Doe"></neu-input>
+          <neu-input label="Email" placeholder="john@example.com" type="email"></neu-input>
+        </div>
+      </div>
+      <div class="code-block">
+        <div class="code-header"><span>HTML</span><button onclick="navigator.clipboard.writeText(this.closest('.code-block').querySelector('pre').textContent)">Copy</button></div>
+<pre><span class="tag">&lt;neu-input</span> <span class="attr">label</span>=<span class="val">"Full Name"</span> <span class="attr">placeholder</span>=<span class="val">"John Doe"</span><span class="tag">&gt;&lt;/neu-input&gt;</span>
+<span class="tag">&lt;neu-input</span> <span class="attr">label</span>=<span class="val">"Email"</span> <span class="attr">type</span>=<span class="val">"email"</span><span class="tag">&gt;&lt;/neu-input&gt;</span></pre>
+      </div>
+    </div>
+
+    <div class="demo-block">
+      <h3>Search Bar</h3>
+      <div class="demo-panel">
+        <neu-input search placeholder="Search anything..."></neu-input>
+      </div>
+      <div class="code-block">
+        <div class="code-header"><span>HTML</span><button onclick="navigator.clipboard.writeText(this.closest('.code-block').querySelector('pre').textContent)">Copy</button></div>
+<pre><span class="tag">&lt;neu-input</span> <span class="attr">search</span> <span class="attr">placeholder</span>=<span class="val">"Search anything..."</span><span class="tag">&gt;&lt;/neu-input&gt;</span></pre>
+      </div>
+    </div>
+
+    <div class="demo-block">
+      <h3>API</h3>
+      <table class="api-table">
+        <thead><tr><th>Property</th><th>Type</th><th>Default</th><th>Description</th></tr></thead>
+        <tbody>
+          <tr><td><code>label</code></td><td class="type-col">string</td><td><code>''</code></td><td>Label above the input</td></tr>
+          <tr><td><code>name</code></td><td class="type-col">string</td><td><code>''</code></td><td>Form field name</td></tr>
+          <tr><td><code>placeholder</code></td><td class="type-col">string</td><td><code>''</code></td><td>Placeholder text</td></tr>
+          <tr><td><code>value</code></td><td class="type-col">string</td><td><code>''</code></td><td>Current value</td></tr>
+          <tr><td><code>type</code></td><td class="type-col">string</td><td><code>'text'</code></td><td>HTML input type</td></tr>
+          <tr><td><code>search</code></td><td class="type-col">boolean</td><td><code>false</code></td><td>Search mode with icon</td></tr>
+        </tbody>
+      </table>
+      <table class="api-table" style="margin-top: 12px;">
+        <thead><tr><th>Event</th><th>Detail</th><th>Description</th></tr></thead>
+        <tbody>
+          <tr><td><code>neu-input</code></td><td class="type-col">{ value: string }</td><td>Fires on input change</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- ═══ Toggle ═══ -->
+  <section class="doc-section" id="toggles">
+    <h2>Toggle</h2>
+    <p class="desc">A switch control with a recessed track and an extruded draggable thumb. The active state lights up with the accent color.</p>
+
+    <div class="demo-block">
+      <h3>States</h3>
+      <div class="demo-panel">
+        <div class="demo-row" style="gap: 32px;">
+          <neu-toggle label="Wi-Fi"></neu-toggle>
+          <neu-toggle label="Bluetooth" checked></neu-toggle>
+          <neu-toggle label="Dark Mode"></neu-toggle>
+        </div>
+      </div>
+      <div class="code-block">
+        <div class="code-header"><span>HTML</span><button onclick="navigator.clipboard.writeText(this.closest('.code-block').querySelector('pre').textContent)">Copy</button></div>
+<pre><span class="tag">&lt;neu-toggle</span> <span class="attr">label</span>=<span class="val">"Wi-Fi"</span><span class="tag">&gt;&lt;/neu-toggle&gt;</span>
+<span class="tag">&lt;neu-toggle</span> <span class="attr">label</span>=<span class="val">"Bluetooth"</span> <span class="attr">checked</span><span class="tag">&gt;&lt;/neu-toggle&gt;</span></pre>
+      </div>
+    </div>
+
+    <div class="demo-block">
+      <h3>API</h3>
+      <table class="api-table">
+        <thead><tr><th>Property</th><th>Type</th><th>Default</th><th>Description</th></tr></thead>
+        <tbody>
+          <tr><td><code>checked</code></td><td class="type-col">boolean</td><td><code>false</code></td><td>Toggle state</td></tr>
+          <tr><td><code>label</code></td><td class="type-col">string</td><td><code>''</code></td><td>Adjacent label text</td></tr>
+        </tbody>
+      </table>
+      <table class="api-table" style="margin-top: 12px;">
+        <thead><tr><th>Event</th><th>Detail</th><th>Description</th></tr></thead>
+        <tbody>
+          <tr><td><code>neu-change</code></td><td class="type-col">{ checked: boolean }</td><td>Fires on toggle</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- ═══ Checkbox ═══ -->
+  <section class="doc-section" id="checkboxes">
+    <h2>Checkbox</h2>
+    <p class="desc">Extruded when unchecked, recesses inward with an accent checkmark when checked. Fully keyboard accessible.</p>
+
+    <div class="demo-block">
+      <h3>States</h3>
+      <div class="demo-panel">
+        <div class="demo-row" style="gap: 24px;">
+          <neu-checkbox label="Accept terms"></neu-checkbox>
+          <neu-checkbox label="Newsletter" checked></neu-checkbox>
+          <neu-checkbox label="Remember me"></neu-checkbox>
+        </div>
+      </div>
+      <div class="code-block">
+        <div class="code-header"><span>HTML</span><button onclick="navigator.clipboard.writeText(this.closest('.code-block').querySelector('pre').textContent)">Copy</button></div>
+<pre><span class="tag">&lt;neu-checkbox</span> <span class="attr">label</span>=<span class="val">"Accept terms"</span><span class="tag">&gt;&lt;/neu-checkbox&gt;</span>
+<span class="tag">&lt;neu-checkbox</span> <span class="attr">label</span>=<span class="val">"Newsletter"</span> <span class="attr">checked</span><span class="tag">&gt;&lt;/neu-checkbox&gt;</span></pre>
+      </div>
+    </div>
+
+    <div class="demo-block">
+      <h3>API</h3>
+      <table class="api-table">
+        <thead><tr><th>Property</th><th>Type</th><th>Default</th><th>Description</th></tr></thead>
+        <tbody>
+          <tr><td><code>checked</code></td><td class="type-col">boolean</td><td><code>false</code></td><td>Checked state</td></tr>
+          <tr><td><code>label</code></td><td class="type-col">string</td><td><code>''</code></td><td>Clickable label text</td></tr>
+        </tbody>
+      </table>
+      <table class="api-table" style="margin-top: 12px;">
+        <thead><tr><th>Event</th><th>Detail</th><th>Description</th></tr></thead>
+        <tbody>
+          <tr><td><code>neu-change</code></td><td class="type-col">{ checked: boolean }</td><td>Fires on check/uncheck</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- ═══ Slider ═══ -->
+  <section class="doc-section" id="sliders">
+    <h2>Slider</h2>
+    <p class="desc">A range input with a recessed track and an extruded thumb bordered in the accent color. Supports labels and live value display.</p>
+
+    <div class="demo-block">
+      <h3>Variants</h3>
+      <div class="demo-panel">
+        <div class="demo-stack">
+          <neu-slider label="Volume" show-value value="65"></neu-slider>
+          <neu-slider label="Brightness" show-value value="80"></neu-slider>
+          <neu-slider label="Temperature" show-value value="22" min="16" max="30" step="0.5"></neu-slider>
+        </div>
+      </div>
+      <div class="code-block">
+        <div class="code-header"><span>HTML</span><button onclick="navigator.clipboard.writeText(this.closest('.code-block').querySelector('pre').textContent)">Copy</button></div>
+<pre><span class="tag">&lt;neu-slider</span>
+  <span class="attr">label</span>=<span class="val">"Volume"</span>
+  <span class="attr">show-value</span>
+  <span class="attr">value</span>=<span class="val">"65"</span>
+<span class="tag">&gt;&lt;/neu-slider&gt;</span>
+
+<span class="tag">&lt;neu-slider</span>
+  <span class="attr">label</span>=<span class="val">"Temperature"</span>
+  <span class="attr">show-value</span>
+  <span class="attr">value</span>=<span class="val">"22"</span>
+  <span class="attr">min</span>=<span class="val">"16"</span>
+  <span class="attr">max</span>=<span class="val">"30"</span>
+  <span class="attr">step</span>=<span class="val">"0.5"</span>
+<span class="tag">&gt;&lt;/neu-slider&gt;</span></pre>
+      </div>
+    </div>
+
+    <div class="demo-block">
+      <h3>API</h3>
+      <table class="api-table">
+        <thead><tr><th>Property</th><th>Type</th><th>Default</th><th>Description</th></tr></thead>
+        <tbody>
+          <tr><td><code>value</code></td><td class="type-col">number</td><td><code>50</code></td><td>Current slider value</td></tr>
+          <tr><td><code>min</code></td><td class="type-col">number</td><td><code>0</code></td><td>Minimum value</td></tr>
+          <tr><td><code>max</code></td><td class="type-col">number</td><td><code>100</code></td><td>Maximum value</td></tr>
+          <tr><td><code>step</code></td><td class="type-col">number</td><td><code>1</code></td><td>Step increment</td></tr>
+          <tr><td><code>label</code></td><td class="type-col">string</td><td><code>''</code></td><td>Label text</td></tr>
+          <tr><td><code>show-value</code></td><td class="type-col">boolean</td><td><code>false</code></td><td>Show live value</td></tr>
+        </tbody>
+      </table>
+      <table class="api-table" style="margin-top: 12px;">
+        <thead><tr><th>Event</th><th>Detail</th><th>Description</th></tr></thead>
+        <tbody>
+          <tr><td><code>neu-input</code></td><td class="type-col">{ value: number }</td><td>Fires on value change</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- ═══ Card ═══ -->
+  <section class="doc-section" id="cards">
+    <h2>Card</h2>
+    <p class="desc">A content container with header, body, and footer slots. Supports extruded (default), flat (recessed), and interactive modes.</p>
+
+    <div class="demo-block">
+      <h3>Variants</h3>
+      <div class="demo-panel">
+        <div class="demo-grid">
+          <neu-card>
+            <h3 slot="header" style="color: #F3B23A; font-size: 1.05rem;">Extruded Card</h3>
+            <p>Standard raised neumorphic card. Content sits naturally on the surface.</p>
+            <div slot="footer"><neu-button size="sm">Action</neu-button></div>
+          </neu-card>
+          <neu-card flat>
+            <h3 slot="header" style="color: #F3B23A; font-size: 1.05rem;">Recessed Card</h3>
+            <p>Uses the <code style="font-family:'JetBrains Mono',monospace;font-size:0.82rem;background:var(--code-bg);padding:2px 6px;border-radius:4px;">flat</code> attribute for an inset well.</p>
+            <div slot="footer"><neu-button size="sm">Learn More</neu-button></div>
+          </neu-card>
+          <neu-card interactive>
+            <h3 slot="header" style="color: #F3B23A; font-size: 1.05rem;">Interactive Card</h3>
+            <p>Hover and press to see shadow transitions. Great for clickable items.</p>
+          </neu-card>
+          <neu-card>
+            <h3 slot="header" style="color: #F3B23A; font-size: 1.05rem;">Nested Controls</h3>
+            <div style="display:flex;flex-direction:column;gap:16px;">
+              <neu-toggle label="Notifications" checked></neu-toggle>
+              <neu-toggle label="Sound"></neu-toggle>
+              <neu-slider label="Opacity" show-value value="75"></neu-slider>
+            </div>
+          </neu-card>
+        </div>
+      </div>
+      <div class="code-block">
+        <div class="code-header"><span>HTML</span><button onclick="navigator.clipboard.writeText(this.closest('.code-block').querySelector('pre').textContent)">Copy</button></div>
+<pre><span class="tag">&lt;neu-card&gt;</span>
+  <span class="tag">&lt;h3</span> <span class="attr">slot</span>=<span class="val">"header"</span><span class="tag">&gt;</span>Title<span class="tag">&lt;/h3&gt;</span>
+  <span class="tag">&lt;p&gt;</span>Card body content goes here.<span class="tag">&lt;/p&gt;</span>
+  <span class="tag">&lt;div</span> <span class="attr">slot</span>=<span class="val">"footer"</span><span class="tag">&gt;</span>
+    <span class="tag">&lt;neu-button</span> <span class="attr">size</span>=<span class="val">"sm"</span><span class="tag">&gt;</span>Action<span class="tag">&lt;/neu-button&gt;</span>
+  <span class="tag">&lt;/div&gt;</span>
+<span class="tag">&lt;/neu-card&gt;</span>
+
+<span class="comment">&lt;!-- Recessed variant --&gt;</span>
+<span class="tag">&lt;neu-card</span> <span class="attr">flat</span><span class="tag">&gt;</span>...<span class="tag">&lt;/neu-card&gt;</span>
+
+<span class="comment">&lt;!-- Interactive (hover + press) --&gt;</span>
+<span class="tag">&lt;neu-card</span> <span class="attr">interactive</span><span class="tag">&gt;</span>...<span class="tag">&lt;/neu-card&gt;</span></pre>
+      </div>
+    </div>
+
+    <div class="demo-block">
+      <h3>API</h3>
+      <table class="api-table">
+        <thead><tr><th>Property</th><th>Type</th><th>Default</th><th>Description</th></tr></thead>
+        <tbody>
+          <tr><td><code>flat</code></td><td class="type-col">boolean</td><td><code>false</code></td><td>Recessed / inset look</td></tr>
+          <tr><td><code>interactive</code></td><td class="type-col">boolean</td><td><code>false</code></td><td>Hover and press effects</td></tr>
+        </tbody>
+      </table>
+      <table class="api-table" style="margin-top: 12px;">
+        <thead><tr><th>Slot</th><th>Description</th></tr></thead>
+        <tbody>
+          <tr><td><code>header</code></td><td>Card title area</td></tr>
+          <tr><td><code>(default)</code></td><td>Main card body</td></tr>
+          <tr><td><code>footer</code></td><td>Footer with actions</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+</main>
+
+<script>
+  const links = document.querySelectorAll('.sidebar a[href^="#"]');
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        links.forEach(l => l.classList.remove('active'));
+        const active = document.querySelector(`.sidebar a[href="#${entry.target.id}"]`);
+        if (active) active.classList.add('active');
+      }
+    });
+  }, { rootMargin: '-20% 0px -75% 0px' });
+  document.querySelectorAll('.doc-section, .hero .install-box').forEach(s => observer.observe(s));
+</script>
+
+</body>
+</html>
