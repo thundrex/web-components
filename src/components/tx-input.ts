@@ -1,11 +1,11 @@
 import { LitElement, html, css } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
-import { neuTokens } from '../styles/neu-tokens.js';
+import { txTokens } from '../styles/tx-tokens.js';
 
-@customElement('neu-input')
-export class NeuInput extends LitElement {
+@customElement('tx-input')
+export class TxInput extends LitElement {
   static override styles = [
-    neuTokens,
+    txTokens,
     css`
       :host {
         display: block;
@@ -14,16 +14,15 @@ export class NeuInput extends LitElement {
       .wrapper {
         display: flex;
         flex-direction: column;
-        gap: 8px;
+        gap: 6px;
       }
 
       label {
-        font-size: 0.85rem;
-        font-weight: 700;
-        color: var(--neu-accent);
-        letter-spacing: 0.04em;
-        text-transform: uppercase;
-        padding-left: 4px;
+        font-size: 0.78rem;
+        font-weight: 600;
+        color: var(--tx-text-secondary);
+        letter-spacing: 0.02em;
+        padding-left: 2px;
       }
 
       .field {
@@ -35,34 +34,38 @@ export class NeuInput extends LitElement {
       input {
         all: unset;
         width: 100%;
-        padding: 14px 20px;
-        background: var(--neu-bg);
-        color: var(--neu-text);
-        font-family: var(--neu-font);
-        font-size: 1rem;
-        font-weight: 500;
-        border-radius: var(--neu-radius);
-        box-shadow: var(--neu-shadow-inset);
-        transition: var(--neu-transition);
+        padding: 10px 14px;
+        background: var(--tx-bg);
+        color: var(--tx-text);
+        font-family: var(--tx-font);
+        font-size: 0.9rem;
+        font-weight: 400;
+        border-radius: var(--tx-radius);
+        border: none;
+        box-shadow: var(--tx-shadow-inset);
+        transition: var(--tx-transition);
       }
 
       input::placeholder {
-        color: var(--neu-text-muted);
+        color: var(--tx-text-muted);
+      }
+
+      input:hover {
+        box-shadow: var(--tx-shadow-inset), 0 0 0 1px rgba(0,0,0,0.04);
       }
 
       input:focus {
-        box-shadow:
-          var(--neu-shadow-inset),
-          0 0 0 2px var(--neu-accent);
+        box-shadow: var(--tx-shadow-inset), 0 0 0 2px var(--tx-primary);
       }
 
+      /* ── Search variant ── */
       :host([search]) .field::before {
         content: '';
         position: absolute;
-        left: 16px;
-        width: 16px;
-        height: 16px;
-        border: 2px solid var(--neu-text-muted);
+        left: 14px;
+        width: 14px;
+        height: 14px;
+        border: 2px solid var(--tx-text-muted);
         border-radius: 50%;
         pointer-events: none;
       }
@@ -70,17 +73,17 @@ export class NeuInput extends LitElement {
       :host([search]) .field::after {
         content: '';
         position: absolute;
-        left: 30px;
+        left: 26px;
         top: calc(50% + 4px);
         width: 2px;
-        height: 8px;
-        background: var(--neu-text-muted);
+        height: 6px;
+        background: var(--tx-text-muted);
         transform: rotate(-45deg);
         pointer-events: none;
       }
 
       :host([search]) input {
-        padding-left: 44px;
+        padding-left: 40px;
       }
     `,
   ];
@@ -95,7 +98,7 @@ export class NeuInput extends LitElement {
   private _handleInput(e: Event) {
     const input = e.target as HTMLInputElement;
     this.value = input.value;
-    this.dispatchEvent(new CustomEvent('neu-input', { detail: { value: this.value }, bubbles: true, composed: true }));
+    this.dispatchEvent(new CustomEvent('tx-input', { detail: { value: this.value }, bubbles: true, composed: true }));
   }
 
   override render() {
@@ -119,6 +122,6 @@ export class NeuInput extends LitElement {
 
 declare global {
   interface HTMLElementTagNameMap {
-    'neu-input': NeuInput;
+    'tx-input': TxInput;
   }
 }

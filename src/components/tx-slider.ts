@@ -1,11 +1,11 @@
 import { LitElement, html, css } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
-import { neuTokens } from '../styles/neu-tokens.js';
+import { txTokens } from '../styles/tx-tokens.js';
 
-@customElement('neu-slider')
-export class NeuSlider extends LitElement {
+@customElement('tx-slider')
+export class TxSlider extends LitElement {
   static override styles = [
-    neuTokens,
+    txTokens,
     css`
       :host {
         display: block;
@@ -25,24 +25,23 @@ export class NeuSlider extends LitElement {
       }
 
       label {
-        font-size: 0.85rem;
-        font-weight: 700;
-        color: var(--neu-accent);
-        letter-spacing: 0.04em;
-        text-transform: uppercase;
-        padding-left: 4px;
+        font-size: 0.78rem;
+        font-weight: 600;
+        color: var(--tx-text-secondary);
+        letter-spacing: 0.02em;
+        padding-left: 2px;
       }
 
       .value-display {
-        font-size: 0.85rem;
-        font-weight: 700;
-        color: var(--neu-text);
-        padding-right: 4px;
+        font-size: 0.82rem;
+        font-weight: 600;
+        color: var(--tx-text);
+        font-variant-numeric: tabular-nums;
       }
 
       .track-container {
         position: relative;
-        height: 40px;
+        height: 32px;
         display: flex;
         align-items: center;
       }
@@ -51,10 +50,10 @@ export class NeuSlider extends LitElement {
         -webkit-appearance: none;
         appearance: none;
         width: 100%;
-        height: 8px;
-        background: var(--neu-bg);
-        border-radius: var(--neu-radius-pill);
-        box-shadow: var(--neu-shadow-inset);
+        height: 6px;
+        background: var(--tx-bg);
+        border-radius: var(--tx-radius-pill);
+        box-shadow: var(--tx-shadow-inset-sm);
         outline: none;
         cursor: pointer;
       }
@@ -62,41 +61,41 @@ export class NeuSlider extends LitElement {
       input[type='range']::-webkit-slider-thumb {
         -webkit-appearance: none;
         appearance: none;
-        width: 28px;
-        height: 28px;
+        width: 22px;
+        height: 22px;
         border-radius: 50%;
-        background: var(--neu-bg);
-        box-shadow: var(--neu-shadow-extruded);
-        border: 3px solid var(--neu-accent);
+        background: var(--tx-bg);
+        box-shadow: var(--tx-shadow-sm);
+        border: 3px solid var(--tx-primary);
         cursor: grab;
-        transition: var(--neu-transition);
+        transition: var(--tx-transition);
       }
 
       input[type='range']::-moz-range-thumb {
-        width: 28px;
-        height: 28px;
+        width: 22px;
+        height: 22px;
         border-radius: 50%;
-        background: var(--neu-bg);
-        box-shadow: var(--neu-shadow-extruded);
-        border: 3px solid var(--neu-accent);
+        background: var(--tx-bg);
+        box-shadow: var(--tx-shadow-sm);
+        border: 3px solid var(--tx-primary);
         cursor: grab;
-        transition: var(--neu-transition);
+        transition: var(--tx-transition);
       }
 
       input[type='range']:active::-webkit-slider-thumb {
-        box-shadow: var(--neu-shadow-inset);
+        box-shadow: var(--tx-shadow-inset-sm);
         cursor: grabbing;
       }
 
       input[type='range']:active::-moz-range-thumb {
-        box-shadow: var(--neu-shadow-inset);
+        box-shadow: var(--tx-shadow-inset-sm);
         cursor: grabbing;
       }
 
       input[type='range']:focus-visible {
-        outline: 2px solid var(--neu-accent);
-        outline-offset: 8px;
-        border-radius: var(--neu-radius-pill);
+        outline: 2px solid var(--tx-primary);
+        outline-offset: 6px;
+        border-radius: var(--tx-radius-pill);
       }
     `,
   ];
@@ -117,7 +116,7 @@ export class NeuSlider extends LitElement {
 
   private _handleInput(e: Event) {
     this.value = Number((e.target as HTMLInputElement).value);
-    this.dispatchEvent(new CustomEvent('neu-input', { detail: { value: this.value }, bubbles: true, composed: true }));
+    this.dispatchEvent(new CustomEvent('tx-input', { detail: { value: this.value }, bubbles: true, composed: true }));
   }
 
   override render() {
@@ -142,6 +141,6 @@ export class NeuSlider extends LitElement {
 
 declare global {
   interface HTMLElementTagNameMap {
-    'neu-slider': NeuSlider;
+    'tx-slider': TxSlider;
   }
 }

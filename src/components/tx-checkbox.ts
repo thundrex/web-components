@@ -1,27 +1,28 @@
 import { LitElement, html, css } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
-import { neuTokens } from '../styles/neu-tokens.js';
+import { txTokens } from '../styles/tx-tokens.js';
 
-@customElement('neu-checkbox')
-export class NeuCheckbox extends LitElement {
+@customElement('tx-checkbox')
+export class TxCheckbox extends LitElement {
   static override styles = [
-    neuTokens,
+    txTokens,
     css`
       :host {
         display: inline-flex;
         align-items: center;
-        gap: 12px;
+        gap: 10px;
       }
 
       .box {
         position: relative;
-        width: 28px;
-        height: 28px;
-        background: var(--neu-bg);
-        border-radius: 8px;
-        box-shadow: var(--neu-shadow-extruded);
+        width: 22px;
+        height: 22px;
+        background: var(--tx-bg);
+        border-radius: 7px;
+        border: none;
+        box-shadow: var(--tx-shadow-sm);
         cursor: pointer;
-        transition: var(--neu-transition);
+        transition: var(--tx-transition);
         display: flex;
         align-items: center;
         justify-content: center;
@@ -30,15 +31,16 @@ export class NeuCheckbox extends LitElement {
       }
 
       :host([checked]) .box {
-        box-shadow: var(--neu-shadow-inset);
+        background: var(--tx-primary);
+        box-shadow: inset 1px 1px 3px rgba(0,0,0,0.15), inset -1px -1px 3px rgba(255,255,255,0.08);
       }
 
       .checkmark {
-        width: 14px;
-        height: 14px;
+        width: 12px;
+        height: 12px;
         opacity: 0;
         transform: scale(0.5);
-        transition: var(--neu-transition);
+        transition: var(--tx-transition);
       }
 
       .checkmark svg {
@@ -51,15 +53,19 @@ export class NeuCheckbox extends LitElement {
         transform: scale(1);
       }
 
+      .box:hover {
+        border-color: var(--tx-primary);
+      }
+
       .box:focus-visible {
-        outline: 2px solid var(--neu-accent);
-        outline-offset: 4px;
+        outline: 2px solid var(--tx-primary);
+        outline-offset: 3px;
       }
 
       .label {
-        font-size: 0.9rem;
-        font-weight: 600;
-        color: var(--neu-text);
+        font-size: 0.875rem;
+        font-weight: 500;
+        color: var(--tx-text);
         user-select: none;
         cursor: pointer;
       }
@@ -71,7 +77,7 @@ export class NeuCheckbox extends LitElement {
 
   private _toggle() {
     this.checked = !this.checked;
-    this.dispatchEvent(new CustomEvent('neu-change', { detail: { checked: this.checked }, bubbles: true, composed: true }));
+    this.dispatchEvent(new CustomEvent('tx-change', { detail: { checked: this.checked }, bubbles: true, composed: true }));
   }
 
   override render() {
@@ -85,7 +91,7 @@ export class NeuCheckbox extends LitElement {
         @keydown=${(e: KeyboardEvent) => { if (e.key === ' ' || e.key === 'Enter') { e.preventDefault(); this._toggle(); } }}
       >
         <span class="checkmark">
-          <svg viewBox="0 0 24 24" fill="none" stroke="var(--neu-accent)" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round">
             <polyline points="4 12 10 18 20 6"></polyline>
           </svg>
         </span>
@@ -97,6 +103,6 @@ export class NeuCheckbox extends LitElement {
 
 declare global {
   interface HTMLElementTagNameMap {
-    'neu-checkbox': NeuCheckbox;
+    'tx-checkbox': TxCheckbox;
   }
 }

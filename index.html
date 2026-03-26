@@ -3,149 +3,166 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ThunderX — Neumorphic Component Library</title>
-  <meta name="description" content="A lightweight Neumorphic (Soft UI) web component library built with Lit." />
+  <title>thundrex — Design System</title>
+  <meta name="description" content="thundrex — Neumorphic design system and web component library built with Lit. Includes Tailwind CSS preset." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Red+Hat+Text:ital,wght@0,300..700;1,300..700&family=Red+Hat+Mono:wght@300..700&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --bg: #E2E6EE;
+      --bg: #E8ECF0;
+      --surface: #E8ECF0;
+      --text: #1A2138;
+      --text-2: #4D5B6A;
+      --text-3: #6B7886;
       --accent: #F3B23A;
-      --text: #6B7A8D;
-      --text-muted: #9BA7B4;
-      --code-bg: #d6dbe4;
+      --primary: #4A7CFF;
+      --code-bg: #DFE3E8;
       --sidebar-w: 240px;
-      --light: rgba(255,255,255,0.8);
-      --dark: rgba(184,197,214,0.6);
+      --neu-shadow:
+        4px 4px 8px rgba(174,182,196,0.18),
+        -4px -4px 8px rgba(255,255,255,0.65);
+      --neu-shadow-sm:
+        2px 2px 5px rgba(174,182,196,0.18),
+        -2px -2px 5px rgba(255,255,255,0.65);
+      --neu-inset:
+        inset 2px 2px 5px rgba(174,182,196,0.18),
+        inset -2px -2px 5px rgba(255,255,255,0.65);
+      --neu-inset-sm:
+        inset 1px 1px 3px rgba(174,182,196,0.18),
+        inset -1px -1px 3px rgba(255,255,255,0.65);
     }
 
     html { scroll-behavior: smooth; scroll-padding-top: 32px; }
 
     body {
       background: var(--bg);
-      font-family: 'Inter', system-ui, sans-serif;
+      font-family: 'Red Hat Text', system-ui, sans-serif;
       color: var(--text);
       line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
     }
 
-    /* ── Sidebar ── */
+    /* ─── Sidebar ─── */
     .sidebar {
       position: fixed;
       top: 0; left: 0;
       width: var(--sidebar-w);
       height: 100vh;
-      padding: 32px 20px;
+      padding: 28px 14px;
       overflow-y: auto;
-      z-index: 100;
       display: flex;
       flex-direction: column;
-      gap: 4px;
+      gap: 2px;
+      z-index: 100;
+      background: var(--bg);
     }
 
     .sidebar-brand {
-      font-size: 1.35rem;
-      font-weight: 900;
-      color: var(--accent);
-      letter-spacing: -0.03em;
-      margin-bottom: 4px;
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--text);
+      letter-spacing: -0.02em;
+      margin-bottom: 2px;
       text-decoration: none;
+      padding-left: 12px;
     }
 
-    .sidebar-brand span { color: var(--text); font-weight: 600; }
+    .sidebar-brand span { color: var(--accent); }
 
     .sidebar-sub {
-      font-size: 0.7rem;
-      color: var(--text-muted);
+      font-size: 0.68rem;
+      color: var(--text-3);
       font-weight: 500;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      margin-bottom: 20px;
+      margin-bottom: 24px;
+      padding-left: 12px;
     }
 
     .sidebar-section {
-      font-size: 0.65rem;
+      font-size: 0.62rem;
       font-weight: 700;
       text-transform: uppercase;
       letter-spacing: 0.1em;
-      color: var(--text-muted);
-      margin-top: 16px;
-      margin-bottom: 6px;
+      color: var(--text-3);
+      margin-top: 18px;
+      margin-bottom: 4px;
       padding-left: 12px;
     }
 
     .sidebar a {
       display: block;
-      padding: 8px 12px;
+      padding: 6px 12px;
       border-radius: 10px;
-      font-size: 0.85rem;
-      font-weight: 600;
-      color: var(--text);
+      font-size: 0.82rem;
+      font-weight: 500;
+      color: var(--text-2);
       text-decoration: none;
-      transition: all 0.15s ease;
+      transition: all 0.2s ease;
     }
 
     .sidebar a:hover, .sidebar a.active {
-      background: rgba(184,197,214,0.25);
-      color: var(--accent);
+      color: var(--text);
+      box-shadow: var(--neu-shadow-sm);
     }
 
     .sidebar-footer {
       margin-top: auto;
-      padding-top: 20px;
+      padding-top: 16px;
     }
 
-    .sidebar-footer a {
-      font-size: 0.8rem;
-      color: var(--text-muted);
-    }
+    .sidebar-footer a { font-size: 0.78rem; color: var(--text-3); }
 
-    /* ── Main ── */
+    /* ─── Main ─── */
     .main {
       margin-left: var(--sidebar-w);
-      padding: 40px 48px 100px;
-      max-width: 920px;
+      padding: 40px 52px 120px;
+      max-width: 900px;
     }
 
-    /* ── Hero ── */
-    .hero {
-      margin-bottom: 56px;
-    }
+    /* ─── Hero ─── */
+    .hero { margin-bottom: 64px; }
 
     .hero h1 {
       font-size: 2.8rem;
-      font-weight: 900;
-      color: var(--accent);
-      letter-spacing: -0.03em;
+      font-weight: 700;
+      color: var(--text);
+      letter-spacing: -0.04em;
       line-height: 1.1;
     }
 
-    .hero h1 span { color: var(--text); }
+    .hero h1 span { color: var(--accent); }
 
     .hero .tagline {
-      font-size: 1.1rem;
-      color: var(--text-muted);
-      font-weight: 500;
+      font-size: 1.05rem;
+      color: var(--text-2);
+      font-weight: 400;
       margin-top: 12px;
-      max-width: 480px;
+      max-width: 520px;
+      line-height: 1.7;
     }
 
-    .hero .install-box {
-      margin-top: 24px;
+    .install-row {
+      margin-top: 28px;
+      display: flex;
+      gap: 12px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .install-box {
       display: inline-flex;
       align-items: center;
-      gap: 12px;
+      gap: 10px;
       background: var(--bg);
-      border-radius: 14px;
-      padding: 14px 20px;
-      box-shadow:
-        inset -6px -6px 12px var(--light),
-        inset 6px 6px 12px var(--dark);
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.9rem;
+      border: none;
+      border-radius: 12px;
+      padding: 10px 16px;
+      font-family: 'Red Hat Mono', monospace;
+      font-size: 0.82rem;
       color: var(--text);
+      box-shadow: var(--neu-inset);
     }
 
     .install-box .dollar { color: var(--accent); font-weight: 700; user-select: none; }
@@ -153,217 +170,370 @@
     .copy-btn {
       all: unset;
       cursor: pointer;
-      padding: 6px;
-      border-radius: 6px;
-      color: var(--text-muted);
-      transition: all 0.15s;
+      font-size: 0.72rem;
+      font-weight: 600;
+      color: var(--text-3);
+      padding: 4px 10px;
+      border-radius: 8px;
+      background: var(--bg);
+      box-shadow: var(--neu-shadow-sm);
+      transition: all 0.2s ease;
     }
-    .copy-btn:hover { color: var(--accent); }
+    .copy-btn:hover { color: var(--primary); }
+    .copy-btn:active { box-shadow: var(--neu-inset-sm); }
 
-    /* ── Sections ── */
-    .doc-section {
-      margin-bottom: 64px;
+    /* ─── Theme switcher ─── */
+    .theme-bar {
+      display: flex;
+      gap: 8px;
+      margin-top: 24px;
+      flex-wrap: wrap;
     }
+
+    .theme-btn {
+      all: unset;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 7px 16px;
+      border-radius: 10px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: var(--text-2);
+      background: var(--bg);
+      border: none;
+      box-shadow: var(--neu-shadow-sm);
+      transition: all 0.2s ease;
+    }
+
+    .theme-btn:hover { color: var(--text); box-shadow: var(--neu-shadow); }
+    .theme-btn:active { box-shadow: var(--neu-inset-sm); }
+    .theme-btn.active { color: var(--primary); box-shadow: var(--neu-inset); }
+
+    .theme-dot {
+      width: 10px; height: 10px;
+      border-radius: 50%;
+      border: none;
+      box-shadow: inset 1px 1px 2px rgba(0,0,0,0.12);
+    }
+
+    /* ─── Sections ─── */
+    .doc-section { margin-bottom: 64px; }
 
     .doc-section > h2 {
-      font-size: 1.5rem;
-      font-weight: 800;
-      color: var(--accent);
-      letter-spacing: -0.01em;
-      margin-bottom: 8px;
+      font-size: 1.35rem;
+      font-weight: 700;
+      color: var(--text);
+      letter-spacing: -0.02em;
+      margin-bottom: 6px;
     }
 
     .doc-section > .desc {
-      font-size: 0.95rem;
-      color: var(--text-muted);
+      font-size: 0.9rem;
+      color: var(--text-2);
       margin-bottom: 28px;
-      max-width: 560px;
+      max-width: 540px;
+      line-height: 1.7;
     }
 
-    /* ── Demo panel ── */
-    .demo-block {
-      margin-bottom: 32px;
-    }
+    /* ─── Demo panel ─── */
+    .demo-block { margin-bottom: 32px; }
 
     .demo-block h3 {
-      font-size: 0.7rem;
+      font-size: 0.65rem;
       font-weight: 700;
       text-transform: uppercase;
       letter-spacing: 0.1em;
-      color: var(--text-muted);
+      color: var(--text-3);
       margin-bottom: 12px;
     }
 
     .demo-panel {
       background: var(--bg);
-      border-radius: 20px;
-      padding: 32px;
-      box-shadow:
-        -6px -6px 12px var(--light),
-        6px 6px 12px var(--dark);
+      border-radius: 16px;
+      padding: 28px;
+      border: none;
+      box-shadow: var(--neu-shadow);
     }
 
-    .demo-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 16px;
-      align-items: center;
-    }
+    .demo-row { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
+    .demo-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .demo-stack { display: flex; flex-direction: column; gap: 16px; }
 
-    .demo-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 20px;
-    }
-
-    .demo-stack {
-      display: flex;
-      flex-direction: column;
-      gap: 20px;
-    }
-
-    /* ── Code block ── */
-    .code-block {
-      position: relative;
-      margin-top: 16px;
-      border-radius: 14px;
-      overflow: hidden;
-    }
+    /* ─── Code block ─── */
+    .code-block { position: relative; margin-top: 14px; border-radius: 12px; overflow: hidden; box-shadow: var(--neu-inset-sm); }
 
     .code-header {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 10px 16px;
-      background: #cdd3de;
-      border-radius: 14px 14px 0 0;
+      padding: 8px 14px;
+      background: var(--code-bg);
+      border-radius: 12px 12px 0 0;
     }
 
     .code-header span {
-      font-size: 0.7rem;
+      font-size: 0.62rem;
       font-weight: 700;
       text-transform: uppercase;
       letter-spacing: 0.08em;
-      color: var(--text-muted);
+      color: var(--text-3);
     }
 
     .code-header button {
       all: unset;
       cursor: pointer;
-      font-size: 0.7rem;
+      font-size: 0.62rem;
       font-weight: 600;
-      color: var(--text-muted);
-      padding: 4px 10px;
-      border-radius: 6px;
+      color: var(--text-3);
+      padding: 3px 8px;
+      border-radius: 5px;
       transition: all 0.15s;
     }
 
-    .code-header button:hover { color: var(--accent); }
+    .code-header button:hover { color: var(--primary); }
 
     pre {
       margin: 0;
-      padding: 16px 20px;
+      padding: 14px 18px;
       background: var(--code-bg);
       overflow-x: auto;
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.82rem;
-      line-height: 1.7;
-      color: var(--text);
-      border-radius: 0 0 14px 14px;
+      font-family: 'Red Hat Mono', monospace;
+      font-size: 0.78rem;
+      line-height: 1.8;
+      color: var(--text-2);
+      border-radius: 0 0 12px 12px;
     }
 
-    pre .tag { color: #c06030; }
-    pre .attr { color: #7c6eb0; }
-    pre .val { color: #2e8b57; }
-    pre .comment { color: var(--text-muted); font-style: italic; }
+    pre .tag { color: #C05030; }
+    pre .attr { color: #7C6EB0; }
+    pre .val { color: #2E8B57; }
+    pre .cmt { color: var(--text-3); font-style: italic; }
+    pre .kw { color: #7C6EB0; }
+    pre .str { color: #2E8B57; }
+    pre .fn { color: #4A7CFF; }
 
-    /* ── API Table ── */
+    /* ─── API Table ─── */
     .api-table {
       width: 100%;
-      border-collapse: separate;
-      border-spacing: 0;
-      margin-top: 20px;
-      font-size: 0.85rem;
-      border-radius: 14px;
+      border-collapse: collapse;
+      margin-top: 16px;
+      font-size: 0.82rem;
+      border-radius: 12px;
       overflow: hidden;
-      box-shadow:
-        inset -4px -4px 8px var(--light),
-        inset 4px 4px 8px var(--dark);
+      border: none;
+      box-shadow: var(--neu-inset-sm);
     }
 
     .api-table th {
       text-align: left;
-      padding: 12px 16px;
-      font-size: 0.7rem;
+      padding: 10px 14px;
+      font-size: 0.62rem;
       font-weight: 700;
       text-transform: uppercase;
       letter-spacing: 0.08em;
-      color: var(--text-muted);
-      background: rgba(184,197,214,0.15);
+      color: var(--text-3);
+      background: var(--code-bg);
     }
 
     .api-table td {
-      padding: 10px 16px;
-      border-top: 1px solid rgba(184,197,214,0.2);
+      padding: 9px 14px;
+      border-top: 1px solid rgba(0,0,0,0.04);
       vertical-align: top;
+      color: var(--text-2);
     }
 
     .api-table code {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.8rem;
+      font-family: 'Red Hat Mono', monospace;
+      font-size: 0.76rem;
       background: var(--code-bg);
-      padding: 2px 6px;
+      padding: 2px 5px;
       border-radius: 4px;
-      color: #c06030;
+      color: #C05030;
     }
 
-    .api-table .type-col {
-      color: var(--text-muted);
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.78rem;
-    }
+    .api-table .type { color: var(--text-3); font-family: 'Red Hat Mono', monospace; font-size: 0.74rem; }
 
-    /* ── Tokens grid ── */
+    /* ─── Token swatches ─── */
     .token-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-      gap: 16px;
-      margin-top: 20px;
+      grid-template-columns: repeat(auto-fill, minmax(145px, 1fr));
+      gap: 14px;
+      margin-top: 16px;
     }
 
-    .token-swatch {
+    .swatch {
       background: var(--bg);
-      border-radius: 16px;
-      padding: 20px;
-      box-shadow:
-        -4px -4px 8px var(--light),
-        4px 4px 8px var(--dark);
+      border-radius: 14px;
+      padding: 16px;
+      border: none;
+      box-shadow: var(--neu-shadow-sm);
       text-align: center;
     }
 
-    .token-swatch .color-dot {
-      width: 40px; height: 40px;
-      border-radius: 50%;
+    .swatch .dot {
+      width: 36px; height: 36px;
+      border-radius: 10px;
       margin: 0 auto 10px;
-      box-shadow:
-        inset -3px -3px 6px var(--light),
-        inset 3px 3px 6px var(--dark);
+      border: none;
+      box-shadow: var(--neu-inset-sm);
     }
 
-    .token-swatch .name {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.75rem;
-      color: var(--text-muted);
+    .swatch .name { font-family: 'Red Hat Mono', monospace; font-size: 0.65rem; color: var(--text-3); }
+    .swatch .val { font-weight: 600; font-size: 0.78rem; color: var(--text); margin-top: 2px; }
+
+    /* ─── Typography showcase ─── */
+    .type-row {
+      display: flex;
+      align-items: baseline;
+      gap: 16px;
+      padding: 10px 0;
+      border-bottom: 1px solid rgba(0,0,0,0.04);
     }
 
-    .token-swatch .value {
+    .type-row:last-child { border-bottom: none; }
+
+    .type-label {
+      flex-shrink: 0;
+      width: 80px;
+      font-family: 'Red Hat Mono', monospace;
+      font-size: 0.72rem;
+      color: var(--text-3);
+    }
+
+    .type-sample { color: var(--text); }
+    .type-meta { margin-left: auto; font-size: 0.72rem; color: var(--text-3); font-family: 'Red Hat Mono', monospace; white-space: nowrap; }
+
+    /* ─── Spacing showcase ─── */
+    .spacing-row {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 6px 0;
+    }
+
+    .spacing-bar {
+      height: 8px;
+      border-radius: 4px;
+      background: var(--primary);
+      opacity: 0.5;
+      transition: all 0.2s;
+    }
+
+    .spacing-label {
+      flex-shrink: 0;
+      width: 60px;
+      font-family: 'Red Hat Mono', monospace;
+      font-size: 0.72rem;
+      color: var(--text-3);
+    }
+
+    .spacing-val {
+      font-family: 'Red Hat Mono', monospace;
+      font-size: 0.72rem;
+      color: var(--text-2);
+    }
+
+    /* ─── Shadow showcase ─── */
+    .shadow-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+      gap: 20px;
+    }
+
+    .shadow-swatch {
+      width: 100%;
+      aspect-ratio: 1;
+      border-radius: 16px;
+      background: var(--bg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .shadow-swatch .name {
+      font-family: 'Red Hat Mono', monospace;
+      font-size: 0.65rem;
+      color: var(--text-3);
+    }
+
+    /* ─── Tailwind class showcase ─── */
+    .tw-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.82rem;
+      margin-top: 12px;
+    }
+
+    .tw-table th {
+      text-align: left;
+      padding: 8px 14px;
+      font-size: 0.62rem;
       font-weight: 700;
-      font-size: 0.85rem;
-      color: var(--text);
-      margin-top: 2px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--text-3);
+      background: var(--code-bg);
     }
 
-    /* ── Mobile ── */
+    .tw-table td {
+      padding: 7px 14px;
+      border-top: 1px solid rgba(0,0,0,0.04);
+      color: var(--text-2);
+    }
+
+    .tw-table code {
+      font-family: 'Red Hat Mono', monospace;
+      font-size: 0.74rem;
+      background: var(--code-bg);
+      padding: 2px 6px;
+      border-radius: 4px;
+    }
+
+    .tw-table .class-name { color: #4A7CFF; }
+    .tw-table .token-ref { color: #C05030; }
+
+    /* ─── Radius showcase ─── */
+    .radius-grid {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+      align-items: end;
+    }
+
+    .radius-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .radius-box {
+      width: 56px;
+      height: 56px;
+      background: var(--bg);
+      box-shadow: var(--neu-shadow-sm);
+    }
+
+    .radius-item .name {
+      font-family: 'Red Hat Mono', monospace;
+      font-size: 0.65rem;
+      color: var(--text-3);
+    }
+
+    /* ─── Inline code ─── */
+    .ic {
+      font-family: 'Red Hat Mono', monospace;
+      font-size: 0.82rem;
+      background: var(--code-bg);
+      padding: 2px 6px;
+      border-radius: 4px;
+    }
+
+    /* ─── Mobile ─── */
     @media (max-width: 800px) {
       .sidebar { display: none; }
       .main { margin-left: 0; padding: 24px 20px 80px; }
@@ -375,14 +545,22 @@
 </head>
 <body>
 
-<!-- ─── Sidebar ─── -->
 <nav class="sidebar">
-  <a href="#top" class="sidebar-brand">Thunder<span>X</span></a>
-  <div class="sidebar-sub">Neumorphic Components</div>
+  <a href="#top" class="sidebar-brand">thundre<span>X</span></a>
+  <div class="sidebar-sub">Design System</div>
 
-  <div class="sidebar-section">Getting Started</div>
+  <div class="sidebar-section">Foundations</div>
   <a href="#install">Installation</a>
-  <a href="#tokens">Design Tokens</a>
+  <a href="#theming">Theming</a>
+  <a href="#typography">Typography</a>
+  <a href="#colors">Colors</a>
+  <a href="#spacing">Spacing</a>
+  <a href="#radius">Radius</a>
+  <a href="#shadows">Shadows</a>
+
+  <div class="sidebar-section">Tailwind CSS</div>
+  <a href="#tailwind">Integration</a>
+  <a href="#tw-classes">Class Reference</a>
 
   <div class="sidebar-section">Components</div>
   <a href="#buttons">Button</a>
@@ -390,6 +568,11 @@
   <a href="#toggles">Toggle</a>
   <a href="#checkboxes">Checkbox</a>
   <a href="#sliders">Slider</a>
+  <a href="#badges">Badge</a>
+  <a href="#avatars">Avatar</a>
+  <a href="#progress">Progress</a>
+  <a href="#tags">Tag</a>
+  <a href="#dividers">Divider</a>
   <a href="#cards">Card</a>
 
   <div class="sidebar-footer">
@@ -397,96 +580,350 @@
   </div>
 </nav>
 
-<!-- ─── Main content ─── -->
 <main class="main" id="top">
 
-  <!-- Hero -->
-  <header class="hero">
-    <h1>Thunder<span>X</span></h1>
-    <p class="tagline">A lightweight Neumorphic (Soft UI) component library built with Lit web components. Drop them into any framework or vanilla HTML.</p>
-    <div class="install-box" id="install">
-      <span class="dollar">$</span>
-      <span>npm install thunderx</span>
-      <button class="copy-btn" onclick="navigator.clipboard.writeText('npm install thunderx');this.textContent='Copied!';setTimeout(()=>this.textContent='Copy',1500)" aria-label="Copy install command">Copy</button>
+  <!-- ─── Hero ─── -->
+  <header class="hero" id="install">
+    <h1>thundre<span>X</span></h1>
+    <p class="tagline">A neumorphic design system and web component library. Soft UI with clean aesthetics, full theming, Tailwind CSS integration, and WCAG AA accessibility.</p>
+    <div class="install-row">
+      <div class="install-box">
+        <span class="dollar">$</span>
+        <span>npm install @thundrex/web-components</span>
+        <button class="copy-btn" onclick="navigator.clipboard.writeText('npm install @thundrex/web-components');this.textContent='Copied!';setTimeout(()=>this.textContent='Copy',1500)">Copy</button>
+      </div>
+    </div>
+
+    <div class="theme-bar" id="theming">
+      <button class="theme-btn active" data-theme="light">
+        <span class="theme-dot" style="background:#E8ECF0;"></span>Light
+      </button>
+      <button class="theme-btn" data-theme="dark">
+        <span class="theme-dot" style="background:#141414;"></span>Dark
+      </button>
+      <button class="theme-btn" data-theme="ocean">
+        <span class="theme-dot" style="background:#0EA5E9;"></span>Ocean
+      </button>
     </div>
   </header>
 
-  <!-- ═══ Design Tokens ═══ -->
-  <section class="doc-section" id="tokens">
-    <h2>Design Tokens</h2>
-    <p class="desc">The visual foundation. Every component shares these CSS custom properties, ensuring a consistent neumorphic surface.</p>
+  <!-- ─── Theming ─── -->
+  <section class="doc-section">
+    <h2>Theming</h2>
+    <p class="desc">Override any design token via CSS custom properties, or use the built-in <code class="ic">setTheme()</code> helper for instant runtime switches.</p>
 
-    <div class="token-grid">
-      <div class="token-swatch">
-        <div class="color-dot" style="background: #E2E6EE;"></div>
-        <div class="name">--neu-bg</div>
-        <div class="value">#E2E6EE</div>
-      </div>
-      <div class="token-swatch">
-        <div class="color-dot" style="background: #F3B23A;"></div>
-        <div class="name">--neu-accent</div>
-        <div class="value">#F3B23A</div>
-      </div>
-      <div class="token-swatch">
-        <div class="color-dot" style="background: #6B7A8D;"></div>
-        <div class="name">--neu-text</div>
-        <div class="value">#6B7A8D</div>
-      </div>
-      <div class="token-swatch">
-        <div class="color-dot" style="background: #9BA7B4;"></div>
-        <div class="name">--neu-text-muted</div>
-        <div class="value">#9BA7B4</div>
+    <div class="code-block">
+      <div class="code-header"><span>JavaScript</span><button onclick="navigator.clipboard.writeText(this.closest('.code-block').querySelector('pre').textContent)">Copy</button></div>
+<pre><span class="kw">import</span> { <span class="fn">setTheme</span>, <span class="fn">resetTheme</span> } <span class="kw">from</span> <span class="str">'@thundrex/web-components'</span>;
+
+<span class="cmt">// Built-in presets</span>
+<span class="fn">setTheme</span>(<span class="str">'dark'</span>);
+<span class="fn">setTheme</span>(<span class="str">'ocean'</span>);
+<span class="fn">resetTheme</span>();
+
+<span class="cmt">// Custom tokens</span>
+<span class="fn">setTheme</span>({
+  <span class="attr">accent</span>: <span class="str">'#E040FB'</span>,
+  <span class="attr">primary</span>: <span class="str">'#00BCD4'</span>,
+  <span class="attr">bg</span>: <span class="str">'#EAEAEA'</span>,
+  <span class="attr">neuDark</span>: <span class="str">'rgba(180,180,180,0.2)'</span>,
+  <span class="attr">neuLight</span>: <span class="str">'rgba(255,255,255,0.7)'</span>,
+});
+
+<span class="cmt">// Scope to a subtree</span>
+<span class="fn">setTheme</span>(<span class="str">'ocean'</span>, document.querySelector(<span class="str">'.sidebar'</span>));</pre>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════ -->
+  <!--  D E S I G N   F O U N D A T I O N S -->
+  <!-- ═══════════════════════════════════ -->
+
+  <!-- ─── Typography ─── -->
+  <section class="doc-section" id="typography">
+    <h2>Typography</h2>
+    <p class="desc">Red Hat Text for UI. Red Hat Mono for code. A clean, modern type system with 8 sizes.</p>
+
+    <div class="demo-block">
+      <h3>Type Scale</h3>
+      <div class="demo-panel">
+        <div class="type-row"><span class="type-label">4xl</span><span class="type-sample" style="font-size:2.25rem;font-weight:700;">The quick brown fox</span><span class="type-meta">2.25rem / 36px</span></div>
+        <div class="type-row"><span class="type-label">3xl</span><span class="type-sample" style="font-size:1.875rem;font-weight:700;">The quick brown fox</span><span class="type-meta">1.875rem / 30px</span></div>
+        <div class="type-row"><span class="type-label">2xl</span><span class="type-sample" style="font-size:1.5rem;font-weight:700;">The quick brown fox</span><span class="type-meta">1.5rem / 24px</span></div>
+        <div class="type-row"><span class="type-label">xl</span><span class="type-sample" style="font-size:1.25rem;font-weight:600;">The quick brown fox</span><span class="type-meta">1.25rem / 20px</span></div>
+        <div class="type-row"><span class="type-label">lg</span><span class="type-sample" style="font-size:1.125rem;font-weight:600;">The quick brown fox</span><span class="type-meta">1.125rem / 18px</span></div>
+        <div class="type-row"><span class="type-label">base</span><span class="type-sample" style="font-size:1rem;font-weight:400;">The quick brown fox</span><span class="type-meta">1rem / 16px</span></div>
+        <div class="type-row"><span class="type-label">sm</span><span class="type-sample" style="font-size:0.875rem;font-weight:400;">The quick brown fox</span><span class="type-meta">0.875rem / 14px</span></div>
+        <div class="type-row"><span class="type-label">xs</span><span class="type-sample" style="font-size:0.75rem;font-weight:400;">The quick brown fox</span><span class="type-meta">0.75rem / 12px</span></div>
       </div>
     </div>
 
-    <div class="demo-block" style="margin-top: 28px;">
-      <h3>Shadow Presets</h3>
+    <div class="demo-block">
+      <h3>Font Families</h3>
       <div class="demo-panel">
-        <div class="demo-row" style="gap: 32px; justify-content: center;">
-          <div style="text-align: center;">
-            <div style="width:80px;height:80px;border-radius:16px;background:var(--bg);box-shadow:-6px -6px 12px rgba(255,255,255,0.8),6px 6px 12px rgba(184,197,214,0.6);margin:0 auto 12px;"></div>
-            <span style="font-size:0.75rem;font-weight:700;color:var(--text-muted);">Extruded</span>
-          </div>
-          <div style="text-align: center;">
-            <div style="width:80px;height:80px;border-radius:16px;background:var(--bg);box-shadow:inset -6px -6px 12px rgba(255,255,255,0.8),inset 6px 6px 12px rgba(184,197,214,0.6);margin:0 auto 12px;"></div>
-            <span style="font-size:0.75rem;font-weight:700;color:var(--text-muted);">Recessed</span>
-          </div>
-          <div style="text-align: center;">
-            <div style="width:80px;height:80px;border-radius:16px;background:var(--bg);box-shadow:-8px -8px 16px rgba(255,255,255,0.8),8px 8px 16px rgba(184,197,214,0.6);margin:0 auto 12px;"></div>
-            <span style="font-size:0.75rem;font-weight:700;color:var(--text-muted);">Hover</span>
-          </div>
+        <div style="margin-bottom:14px;">
+          <div style="font-size:0.72rem;color:var(--text-3);margin-bottom:4px;font-weight:600;">RED HAT TEXT — <code class="ic">--tx-font</code></div>
+          <div style="font-size:1.1rem;font-weight:400;">Regular 400 — Clean and readable for body text.</div>
+          <div style="font-size:1.1rem;font-weight:500;">Medium 500 — Labels, secondary headings.</div>
+          <div style="font-size:1.1rem;font-weight:600;">Semibold 600 — Emphasis, buttons.</div>
+          <div style="font-size:1.1rem;font-weight:700;">Bold 700 — Headings, key content.</div>
+        </div>
+        <div>
+          <div style="font-size:0.72rem;color:var(--text-3);margin-bottom:4px;font-weight:600;">RED HAT MONO — <code class="ic">--tx-font-mono</code></div>
+          <div style="font-family:'Red Hat Mono',monospace;font-size:0.9rem;">const theme = setTheme('dark');</div>
+          <div style="font-family:'Red Hat Mono',monospace;font-size:0.9rem;">npm install @thundrex/web-components</div>
         </div>
       </div>
     </div>
   </section>
 
+  <!-- ─── Colors ─── -->
+  <section class="doc-section" id="colors">
+    <h2>Color Palette</h2>
+    <p class="desc">All colors are CSS custom properties that update with theme changes. Soft variants at 10-12% opacity for backgrounds.</p>
+
+    <div class="demo-block">
+      <h3>Core Palette</h3>
+      <div class="token-grid">
+        <div class="swatch"><div class="dot" style="background:#E8ECF0;"></div><div class="name">--tx-bg</div><div class="val">#E8ECF0</div></div>
+        <div class="swatch"><div class="dot" style="background:#DFE3E8;"></div><div class="name">--tx-surface-alt</div><div class="val">#DFE3E8</div></div>
+        <div class="swatch"><div class="dot" style="background:#F3B23A;"></div><div class="name">--tx-accent</div><div class="val">#F3B23A</div></div>
+        <div class="swatch"><div class="dot" style="background:#4A7CFF;"></div><div class="name">--tx-primary</div><div class="val">#4A7CFF</div></div>
+        <div class="swatch"><div class="dot" style="background:#34C759;"></div><div class="name">--tx-success</div><div class="val">#34C759</div></div>
+        <div class="swatch"><div class="dot" style="background:#FF3B30;"></div><div class="name">--tx-danger</div><div class="val">#FF3B30</div></div>
+      </div>
+    </div>
+
+    <div class="demo-block">
+      <h3>Text Colors</h3>
+      <div class="token-grid">
+        <div class="swatch"><div class="dot" style="background:#1A2138;"></div><div class="name">--tx-text</div><div class="val">#1A2138</div></div>
+        <div class="swatch"><div class="dot" style="background:#4D5B6A;"></div><div class="name">--tx-text-secondary</div><div class="val">#4D5B6A</div></div>
+        <div class="swatch"><div class="dot" style="background:#6B7886;"></div><div class="name">--tx-text-muted</div><div class="val">#6B7886</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── Spacing ─── -->
+  <section class="doc-section" id="spacing">
+    <h2>Spacing</h2>
+    <p class="desc">A consistent spacing scale built on 4px increments. Use <code class="ic">--tx-space-*</code> tokens or the Tailwind <code class="ic">p-tx-*</code> / <code class="ic">m-tx-*</code> classes.</p>
+
+    <div class="demo-panel">
+      <div class="spacing-row"><span class="spacing-label">space-1</span><div class="spacing-bar" style="width:4px;"></div><span class="spacing-val">4px</span></div>
+      <div class="spacing-row"><span class="spacing-label">space-2</span><div class="spacing-bar" style="width:8px;"></div><span class="spacing-val">8px</span></div>
+      <div class="spacing-row"><span class="spacing-label">space-3</span><div class="spacing-bar" style="width:12px;"></div><span class="spacing-val">12px</span></div>
+      <div class="spacing-row"><span class="spacing-label">space-4</span><div class="spacing-bar" style="width:16px;"></div><span class="spacing-val">16px</span></div>
+      <div class="spacing-row"><span class="spacing-label">space-5</span><div class="spacing-bar" style="width:20px;"></div><span class="spacing-val">20px</span></div>
+      <div class="spacing-row"><span class="spacing-label">space-6</span><div class="spacing-bar" style="width:24px;"></div><span class="spacing-val">24px</span></div>
+      <div class="spacing-row"><span class="spacing-label">space-8</span><div class="spacing-bar" style="width:32px;"></div><span class="spacing-val">32px</span></div>
+      <div class="spacing-row"><span class="spacing-label">space-10</span><div class="spacing-bar" style="width:40px;"></div><span class="spacing-val">40px</span></div>
+      <div class="spacing-row"><span class="spacing-label">space-12</span><div class="spacing-bar" style="width:48px;"></div><span class="spacing-val">48px</span></div>
+      <div class="spacing-row"><span class="spacing-label">space-16</span><div class="spacing-bar" style="width:64px;"></div><span class="spacing-val">64px</span></div>
+    </div>
+  </section>
+
+  <!-- ─── Radius ─── -->
+  <section class="doc-section" id="radius">
+    <h2>Border Radius</h2>
+    <p class="desc">Soft, rounded corners are fundamental to neumorphism. Five radius tokens from subtle to pill.</p>
+
+    <div class="demo-panel">
+      <div class="radius-grid">
+        <div class="radius-item"><div class="radius-box" style="border-radius:8px;"></div><div class="name">sm — 8px</div></div>
+        <div class="radius-item"><div class="radius-box" style="border-radius:12px;"></div><div class="name">default — 12px</div></div>
+        <div class="radius-item"><div class="radius-box" style="border-radius:16px;"></div><div class="name">lg — 16px</div></div>
+        <div class="radius-item"><div class="radius-box" style="border-radius:20px;"></div><div class="name">xl — 20px</div></div>
+        <div class="radius-item"><div class="radius-box" style="border-radius:999px;"></div><div class="name">pill — 999px</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── Shadows ─── -->
+  <section class="doc-section" id="shadows">
+    <h2>Shadow System</h2>
+    <p class="desc">The neumorphic illusion: two opposing shadows (one light, one dark) create depth. Extruded elements feel raised; recessed elements feel sunken.</p>
+
+    <div class="demo-block">
+      <h3>Extruded (Raised)</h3>
+      <div class="demo-panel">
+        <div class="shadow-grid">
+          <div class="shadow-swatch" style="box-shadow:var(--neu-shadow-sm);"><span class="name">shadow-sm</span></div>
+          <div class="shadow-swatch" style="box-shadow:var(--neu-shadow);"><span class="name">shadow-md</span></div>
+          <div class="shadow-swatch" style="box-shadow:6px 6px 14px rgba(174,182,196,0.18), -6px -6px 14px rgba(255,255,255,0.65);"><span class="name">shadow-lg</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="demo-block">
+      <h3>Recessed (Sunken)</h3>
+      <div class="demo-panel">
+        <div class="shadow-grid">
+          <div class="shadow-swatch" style="box-shadow:var(--neu-inset-sm);"><span class="name">inset-sm</span></div>
+          <div class="shadow-swatch" style="box-shadow:var(--neu-inset);"><span class="name">inset</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════ -->
+  <!--  T A I L W I N D   C S S       -->
+  <!-- ═══════════════════════════════ -->
+
+  <section class="doc-section" id="tailwind">
+    <h2>Tailwind CSS Integration</h2>
+    <p class="desc">Use thundrex design tokens as Tailwind utility classes. All values reference CSS custom properties, so they respond to runtime theme switches.</p>
+
+    <div class="demo-block">
+      <h3>Setup</h3>
+      <div class="code-block">
+        <div class="code-header"><span>tailwind.config.js</span><button onclick="navigator.clipboard.writeText(this.closest('.code-block').querySelector('pre').textContent)">Copy</button></div>
+<pre><span class="kw">import</span> thundrex <span class="kw">from</span> <span class="str">'@thundrex/web-components/tailwind-preset'</span>;
+
+<span class="kw">export default</span> {
+  <span class="attr">presets</span>: [thundrex],
+  <span class="attr">content</span>: [<span class="str">'./src/**/*.{html,js,ts,jsx,tsx}'</span>],
+};</pre>
+      </div>
+    </div>
+
+    <div class="demo-block">
+      <h3>Usage Example</h3>
+      <div class="code-block">
+        <div class="code-header"><span>HTML</span><button onclick="navigator.clipboard.writeText(this.closest('.code-block').querySelector('pre').textContent)">Copy</button></div>
+<pre><span class="cmt">&lt;!-- Neumorphic card using Tailwind classes --&gt;</span>
+<span class="tag">&lt;div</span> <span class="attr">class</span>=<span class="val">"bg-tx-bg rounded-tx-lg shadow-tx-md p-tx-6 font-tx"</span><span class="tag">&gt;</span>
+  <span class="tag">&lt;h2</span> <span class="attr">class</span>=<span class="val">"text-tx-text text-tx-xl font-bold"</span><span class="tag">&gt;</span>Card Title<span class="tag">&lt;/h2&gt;</span>
+  <span class="tag">&lt;p</span> <span class="attr">class</span>=<span class="val">"text-tx-text-secondary text-tx-sm mt-tx-2"</span><span class="tag">&gt;</span>Body text<span class="tag">&lt;/p&gt;</span>
+  <span class="tag">&lt;input</span> <span class="attr">class</span>=<span class="val">"bg-tx-bg rounded-tx shadow-tx-inset-sm p-tx-3 mt-tx-4"</span> <span class="tag">/&gt;</span>
+<span class="tag">&lt;/div&gt;</span></pre>
+      </div>
+    </div>
+  </section>
+
+  <section class="doc-section" id="tw-classes">
+    <h2>Tailwind Class Reference</h2>
+    <p class="desc">All utility classes generated by the thundrex preset.</p>
+
+    <div class="demo-block">
+      <h3>Colors</h3>
+      <table class="tw-table">
+        <thead><tr><th>Class</th><th>Token</th><th>Value</th></tr></thead>
+        <tbody>
+          <tr><td><code class="class-name">bg-tx-bg</code></td><td><code class="token-ref">--tx-bg</code></td><td>#E8ECF0</td></tr>
+          <tr><td><code class="class-name">bg-tx-surface</code></td><td><code class="token-ref">--tx-surface</code></td><td>#E8ECF0</td></tr>
+          <tr><td><code class="class-name">bg-tx-primary</code></td><td><code class="token-ref">--tx-primary</code></td><td>#4A7CFF</td></tr>
+          <tr><td><code class="class-name">bg-tx-accent</code></td><td><code class="token-ref">--tx-accent</code></td><td>#F3B23A</td></tr>
+          <tr><td><code class="class-name">bg-tx-success</code></td><td><code class="token-ref">--tx-success</code></td><td>#34C759</td></tr>
+          <tr><td><code class="class-name">bg-tx-danger</code></td><td><code class="token-ref">--tx-danger</code></td><td>#FF3B30</td></tr>
+          <tr><td><code class="class-name">text-tx-text</code></td><td><code class="token-ref">--tx-text</code></td><td>#1A2138</td></tr>
+          <tr><td><code class="class-name">text-tx-text-secondary</code></td><td><code class="token-ref">--tx-text-secondary</code></td><td>#4D5B6A</td></tr>
+          <tr><td><code class="class-name">text-tx-text-muted</code></td><td><code class="token-ref">--tx-text-muted</code></td><td>#6B7886</td></tr>
+          <tr><td><code class="class-name">border-tx-border</code></td><td><code class="token-ref">--tx-border</code></td><td>rgba(0,0,0,0.06)</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="demo-block">
+      <h3>Shadows (Neumorphic)</h3>
+      <table class="tw-table">
+        <thead><tr><th>Class</th><th>Effect</th></tr></thead>
+        <tbody>
+          <tr><td><code class="class-name">shadow-tx-sm</code></td><td>Subtle extruded</td></tr>
+          <tr><td><code class="class-name">shadow-tx-md</code></td><td>Standard extruded</td></tr>
+          <tr><td><code class="class-name">shadow-tx-lg</code></td><td>Prominent extruded</td></tr>
+          <tr><td><code class="class-name">shadow-tx-inset</code></td><td>Standard recessed</td></tr>
+          <tr><td><code class="class-name">shadow-tx-inset-sm</code></td><td>Subtle recessed</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="demo-block">
+      <h3>Border Radius</h3>
+      <table class="tw-table">
+        <thead><tr><th>Class</th><th>Value</th></tr></thead>
+        <tbody>
+          <tr><td><code class="class-name">rounded-tx-sm</code></td><td>8px</td></tr>
+          <tr><td><code class="class-name">rounded-tx</code></td><td>12px</td></tr>
+          <tr><td><code class="class-name">rounded-tx-lg</code></td><td>16px</td></tr>
+          <tr><td><code class="class-name">rounded-tx-xl</code></td><td>20px</td></tr>
+          <tr><td><code class="class-name">rounded-tx-pill</code></td><td>999px</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="demo-block">
+      <h3>Spacing</h3>
+      <table class="tw-table">
+        <thead><tr><th>Class Pattern</th><th>Value</th></tr></thead>
+        <tbody>
+          <tr><td><code class="class-name">p-tx-1</code> / <code class="class-name">m-tx-1</code> / <code class="class-name">gap-tx-1</code></td><td>4px</td></tr>
+          <tr><td><code class="class-name">p-tx-2</code> / <code class="class-name">m-tx-2</code> / <code class="class-name">gap-tx-2</code></td><td>8px</td></tr>
+          <tr><td><code class="class-name">p-tx-3</code> / <code class="class-name">m-tx-3</code> / <code class="class-name">gap-tx-3</code></td><td>12px</td></tr>
+          <tr><td><code class="class-name">p-tx-4</code> / <code class="class-name">m-tx-4</code> / <code class="class-name">gap-tx-4</code></td><td>16px</td></tr>
+          <tr><td><code class="class-name">p-tx-6</code> / <code class="class-name">m-tx-6</code> / <code class="class-name">gap-tx-6</code></td><td>24px</td></tr>
+          <tr><td><code class="class-name">p-tx-8</code> / <code class="class-name">m-tx-8</code> / <code class="class-name">gap-tx-8</code></td><td>32px</td></tr>
+          <tr><td><code class="class-name">p-tx-12</code> / <code class="class-name">m-tx-12</code> / <code class="class-name">gap-tx-12</code></td><td>48px</td></tr>
+          <tr><td><code class="class-name">p-tx-16</code> / <code class="class-name">m-tx-16</code> / <code class="class-name">gap-tx-16</code></td><td>64px</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="demo-block">
+      <h3>Typography</h3>
+      <table class="tw-table">
+        <thead><tr><th>Class</th><th>Value</th></tr></thead>
+        <tbody>
+          <tr><td><code class="class-name">font-tx</code></td><td>Red Hat Text</td></tr>
+          <tr><td><code class="class-name">font-tx-mono</code></td><td>Red Hat Mono</td></tr>
+          <tr><td><code class="class-name">text-tx-xs</code> … <code class="class-name">text-tx-4xl</code></td><td>0.75rem … 2.25rem</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════ -->
+  <!--  C O M P O N E N T S           -->
+  <!-- ═══════════════════════════════ -->
+
   <!-- ═══ Button ═══ -->
   <section class="doc-section" id="buttons">
     <h2>Button</h2>
-    <p class="desc">Extruded by default, lifts on hover, and presses inward on click. Supports multiple sizes, pill shape, icon-only, and disabled state.</p>
+    <p class="desc">Neumorphic button — extruded by default, recesses on press. Four variants: default, primary, accent, ghost.</p>
 
     <div class="demo-block">
       <h3>Variants</h3>
       <div class="demo-panel">
         <div class="demo-row">
-          <neu-button>Default</neu-button>
-          <neu-button size="sm">Small</neu-button>
-          <neu-button size="lg">Large</neu-button>
-          <neu-button pill>Pill</neu-button>
-          <neu-button disabled>Disabled</neu-button>
-          <neu-button icon-only>
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#F3B23A" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
-          </neu-button>
+          <tx-button>Default</tx-button>
+          <tx-button variant="primary">Primary</tx-button>
+          <tx-button variant="accent">Accent</tx-button>
+          <tx-button variant="ghost">Ghost</tx-button>
+          <tx-button disabled>Disabled</tx-button>
+        </div>
+      </div>
+    </div>
+
+    <div class="demo-block">
+      <h3>Sizes & Shapes</h3>
+      <div class="demo-panel">
+        <div class="demo-row">
+          <tx-button size="sm">Small</tx-button>
+          <tx-button>Medium</tx-button>
+          <tx-button size="lg">Large</tx-button>
+          <tx-button pill variant="primary">Pill</tx-button>
+          <tx-button icon-only variant="accent">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+          </tx-button>
         </div>
       </div>
       <div class="code-block">
         <div class="code-header"><span>HTML</span><button onclick="navigator.clipboard.writeText(this.closest('.code-block').querySelector('pre').textContent)">Copy</button></div>
-<pre><span class="tag">&lt;neu-button&gt;</span>Default<span class="tag">&lt;/neu-button&gt;</span>
-<span class="tag">&lt;neu-button</span> <span class="attr">size</span>=<span class="val">"sm"</span><span class="tag">&gt;</span>Small<span class="tag">&lt;/neu-button&gt;</span>
-<span class="tag">&lt;neu-button</span> <span class="attr">size</span>=<span class="val">"lg"</span><span class="tag">&gt;</span>Large<span class="tag">&lt;/neu-button&gt;</span>
-<span class="tag">&lt;neu-button</span> <span class="attr">pill</span><span class="tag">&gt;</span>Pill<span class="tag">&lt;/neu-button&gt;</span>
-<span class="tag">&lt;neu-button</span> <span class="attr">disabled</span><span class="tag">&gt;</span>Disabled<span class="tag">&lt;/neu-button&gt;</span>
-<span class="tag">&lt;neu-button</span> <span class="attr">icon-only</span><span class="tag">&gt;</span>...<span class="tag">&lt;/neu-button&gt;</span></pre>
+<pre><span class="tag">&lt;tx-button&gt;</span>Default<span class="tag">&lt;/tx-button&gt;</span>
+<span class="tag">&lt;tx-button</span> <span class="attr">variant</span>=<span class="val">"primary"</span><span class="tag">&gt;</span>Primary<span class="tag">&lt;/tx-button&gt;</span>
+<span class="tag">&lt;tx-button</span> <span class="attr">variant</span>=<span class="val">"accent"</span><span class="tag">&gt;</span>Accent<span class="tag">&lt;/tx-button&gt;</span>
+<span class="tag">&lt;tx-button</span> <span class="attr">pill</span> <span class="attr">size</span>=<span class="val">"lg"</span><span class="tag">&gt;</span>Large Pill<span class="tag">&lt;/tx-button&gt;</span>
+<span class="tag">&lt;tx-button</span> <span class="attr">icon-only</span><span class="tag">&gt;</span>...<span class="tag">&lt;/tx-button&gt;</span></pre>
       </div>
     </div>
 
@@ -495,10 +932,11 @@
       <table class="api-table">
         <thead><tr><th>Property</th><th>Type</th><th>Default</th><th>Description</th></tr></thead>
         <tbody>
-          <tr><td><code>size</code></td><td class="type-col">'sm' | 'md' | 'lg'</td><td><code>'md'</code></td><td>Button size variant</td></tr>
-          <tr><td><code>pill</code></td><td class="type-col">boolean</td><td><code>false</code></td><td>Fully rounded corners</td></tr>
-          <tr><td><code>icon-only</code></td><td class="type-col">boolean</td><td><code>false</code></td><td>Circular button for icons</td></tr>
-          <tr><td><code>disabled</code></td><td class="type-col">boolean</td><td><code>false</code></td><td>Disables interaction</td></tr>
+          <tr><td><code>variant</code></td><td class="type">'default' | 'primary' | 'accent' | 'ghost'</td><td><code>'default'</code></td><td>Visual style</td></tr>
+          <tr><td><code>size</code></td><td class="type">'sm' | 'md' | 'lg'</td><td><code>'md'</code></td><td>Button size</td></tr>
+          <tr><td><code>pill</code></td><td class="type">boolean</td><td><code>false</code></td><td>Rounded pill shape</td></tr>
+          <tr><td><code>icon-only</code></td><td class="type">boolean</td><td><code>false</code></td><td>Circular icon button</td></tr>
+          <tr><td><code>disabled</code></td><td class="type">boolean</td><td><code>false</code></td><td>Disabled state</td></tr>
         </tbody>
       </table>
     </div>
@@ -507,31 +945,27 @@
   <!-- ═══ Input ═══ -->
   <section class="doc-section" id="inputs">
     <h2>Input</h2>
-    <p class="desc">Form inputs default to the recessed (inset) neumorphic look. Includes text fields, email, and a search variant with a magnifying-glass icon.</p>
+    <p class="desc">Recessed text field with inset neumorphic shadow. Focus ring uses the primary color.</p>
 
     <div class="demo-block">
       <h3>Text Fields</h3>
       <div class="demo-panel">
         <div class="demo-grid">
-          <neu-input label="Full Name" placeholder="John Doe"></neu-input>
-          <neu-input label="Email" placeholder="john@example.com" type="email"></neu-input>
+          <tx-input label="Full Name" placeholder="John Doe"></tx-input>
+          <tx-input label="Email" placeholder="john@example.com" type="email"></tx-input>
         </div>
-      </div>
-      <div class="code-block">
-        <div class="code-header"><span>HTML</span><button onclick="navigator.clipboard.writeText(this.closest('.code-block').querySelector('pre').textContent)">Copy</button></div>
-<pre><span class="tag">&lt;neu-input</span> <span class="attr">label</span>=<span class="val">"Full Name"</span> <span class="attr">placeholder</span>=<span class="val">"John Doe"</span><span class="tag">&gt;&lt;/neu-input&gt;</span>
-<span class="tag">&lt;neu-input</span> <span class="attr">label</span>=<span class="val">"Email"</span> <span class="attr">type</span>=<span class="val">"email"</span><span class="tag">&gt;&lt;/neu-input&gt;</span></pre>
       </div>
     </div>
 
     <div class="demo-block">
-      <h3>Search Bar</h3>
+      <h3>Search</h3>
       <div class="demo-panel">
-        <neu-input search placeholder="Search anything..."></neu-input>
+        <tx-input search placeholder="Search anything..."></tx-input>
       </div>
       <div class="code-block">
         <div class="code-header"><span>HTML</span><button onclick="navigator.clipboard.writeText(this.closest('.code-block').querySelector('pre').textContent)">Copy</button></div>
-<pre><span class="tag">&lt;neu-input</span> <span class="attr">search</span> <span class="attr">placeholder</span>=<span class="val">"Search anything..."</span><span class="tag">&gt;&lt;/neu-input&gt;</span></pre>
+<pre><span class="tag">&lt;tx-input</span> <span class="attr">label</span>=<span class="val">"Full Name"</span> <span class="attr">placeholder</span>=<span class="val">"John Doe"</span><span class="tag">&gt;&lt;/tx-input&gt;</span>
+<span class="tag">&lt;tx-input</span> <span class="attr">search</span> <span class="attr">placeholder</span>=<span class="val">"Search..."</span><span class="tag">&gt;&lt;/tx-input&gt;</span></pre>
       </div>
     </div>
 
@@ -540,18 +974,17 @@
       <table class="api-table">
         <thead><tr><th>Property</th><th>Type</th><th>Default</th><th>Description</th></tr></thead>
         <tbody>
-          <tr><td><code>label</code></td><td class="type-col">string</td><td><code>''</code></td><td>Label above the input</td></tr>
-          <tr><td><code>name</code></td><td class="type-col">string</td><td><code>''</code></td><td>Form field name</td></tr>
-          <tr><td><code>placeholder</code></td><td class="type-col">string</td><td><code>''</code></td><td>Placeholder text</td></tr>
-          <tr><td><code>value</code></td><td class="type-col">string</td><td><code>''</code></td><td>Current value</td></tr>
-          <tr><td><code>type</code></td><td class="type-col">string</td><td><code>'text'</code></td><td>HTML input type</td></tr>
-          <tr><td><code>search</code></td><td class="type-col">boolean</td><td><code>false</code></td><td>Search mode with icon</td></tr>
+          <tr><td><code>label</code></td><td class="type">string</td><td><code>''</code></td><td>Label above input</td></tr>
+          <tr><td><code>name</code></td><td class="type">string</td><td><code>''</code></td><td>Form field name</td></tr>
+          <tr><td><code>placeholder</code></td><td class="type">string</td><td><code>''</code></td><td>Placeholder text</td></tr>
+          <tr><td><code>type</code></td><td class="type">string</td><td><code>'text'</code></td><td>HTML input type</td></tr>
+          <tr><td><code>search</code></td><td class="type">boolean</td><td><code>false</code></td><td>Search mode</td></tr>
         </tbody>
       </table>
-      <table class="api-table" style="margin-top: 12px;">
+      <table class="api-table" style="margin-top: 10px;">
         <thead><tr><th>Event</th><th>Detail</th><th>Description</th></tr></thead>
         <tbody>
-          <tr><td><code>neu-input</code></td><td class="type-col">{ value: string }</td><td>Fires on input change</td></tr>
+          <tr><td><code>tx-input</code></td><td class="type">{ value }</td><td>Fires on input</td></tr>
         </tbody>
       </table>
     </div>
@@ -560,21 +993,21 @@
   <!-- ═══ Toggle ═══ -->
   <section class="doc-section" id="toggles">
     <h2>Toggle</h2>
-    <p class="desc">A switch control with a recessed track and an extruded draggable thumb. The active state lights up with the accent color.</p>
+    <p class="desc">Switch with a recessed track and extruded thumb. Smooth slide animation.</p>
 
     <div class="demo-block">
       <h3>States</h3>
       <div class="demo-panel">
-        <div class="demo-row" style="gap: 32px;">
-          <neu-toggle label="Wi-Fi"></neu-toggle>
-          <neu-toggle label="Bluetooth" checked></neu-toggle>
-          <neu-toggle label="Dark Mode"></neu-toggle>
+        <div class="demo-row" style="gap: 28px;">
+          <tx-toggle label="Wi-Fi"></tx-toggle>
+          <tx-toggle label="Bluetooth" checked></tx-toggle>
+          <tx-toggle label="Dark Mode"></tx-toggle>
         </div>
       </div>
       <div class="code-block">
         <div class="code-header"><span>HTML</span><button onclick="navigator.clipboard.writeText(this.closest('.code-block').querySelector('pre').textContent)">Copy</button></div>
-<pre><span class="tag">&lt;neu-toggle</span> <span class="attr">label</span>=<span class="val">"Wi-Fi"</span><span class="tag">&gt;&lt;/neu-toggle&gt;</span>
-<span class="tag">&lt;neu-toggle</span> <span class="attr">label</span>=<span class="val">"Bluetooth"</span> <span class="attr">checked</span><span class="tag">&gt;&lt;/neu-toggle&gt;</span></pre>
+<pre><span class="tag">&lt;tx-toggle</span> <span class="attr">label</span>=<span class="val">"Wi-Fi"</span><span class="tag">&gt;&lt;/tx-toggle&gt;</span>
+<span class="tag">&lt;tx-toggle</span> <span class="attr">label</span>=<span class="val">"Bluetooth"</span> <span class="attr">checked</span><span class="tag">&gt;&lt;/tx-toggle&gt;</span></pre>
       </div>
     </div>
 
@@ -583,14 +1016,8 @@
       <table class="api-table">
         <thead><tr><th>Property</th><th>Type</th><th>Default</th><th>Description</th></tr></thead>
         <tbody>
-          <tr><td><code>checked</code></td><td class="type-col">boolean</td><td><code>false</code></td><td>Toggle state</td></tr>
-          <tr><td><code>label</code></td><td class="type-col">string</td><td><code>''</code></td><td>Adjacent label text</td></tr>
-        </tbody>
-      </table>
-      <table class="api-table" style="margin-top: 12px;">
-        <thead><tr><th>Event</th><th>Detail</th><th>Description</th></tr></thead>
-        <tbody>
-          <tr><td><code>neu-change</code></td><td class="type-col">{ checked: boolean }</td><td>Fires on toggle</td></tr>
+          <tr><td><code>checked</code></td><td class="type">boolean</td><td><code>false</code></td><td>Toggle state</td></tr>
+          <tr><td><code>label</code></td><td class="type">string</td><td><code>''</code></td><td>Label text</td></tr>
         </tbody>
       </table>
     </div>
@@ -599,21 +1026,21 @@
   <!-- ═══ Checkbox ═══ -->
   <section class="doc-section" id="checkboxes">
     <h2>Checkbox</h2>
-    <p class="desc">Extruded when unchecked, recesses inward with an accent checkmark when checked. Fully keyboard accessible.</p>
+    <p class="desc">Extruded checkbox that recesses when checked, with an animated checkmark.</p>
 
     <div class="demo-block">
       <h3>States</h3>
       <div class="demo-panel">
         <div class="demo-row" style="gap: 24px;">
-          <neu-checkbox label="Accept terms"></neu-checkbox>
-          <neu-checkbox label="Newsletter" checked></neu-checkbox>
-          <neu-checkbox label="Remember me"></neu-checkbox>
+          <tx-checkbox label="Accept terms"></tx-checkbox>
+          <tx-checkbox label="Newsletter" checked></tx-checkbox>
+          <tx-checkbox label="Remember me"></tx-checkbox>
         </div>
       </div>
       <div class="code-block">
         <div class="code-header"><span>HTML</span><button onclick="navigator.clipboard.writeText(this.closest('.code-block').querySelector('pre').textContent)">Copy</button></div>
-<pre><span class="tag">&lt;neu-checkbox</span> <span class="attr">label</span>=<span class="val">"Accept terms"</span><span class="tag">&gt;&lt;/neu-checkbox&gt;</span>
-<span class="tag">&lt;neu-checkbox</span> <span class="attr">label</span>=<span class="val">"Newsletter"</span> <span class="attr">checked</span><span class="tag">&gt;&lt;/neu-checkbox&gt;</span></pre>
+<pre><span class="tag">&lt;tx-checkbox</span> <span class="attr">label</span>=<span class="val">"Accept terms"</span><span class="tag">&gt;&lt;/tx-checkbox&gt;</span>
+<span class="tag">&lt;tx-checkbox</span> <span class="attr">label</span>=<span class="val">"Newsletter"</span> <span class="attr">checked</span><span class="tag">&gt;&lt;/tx-checkbox&gt;</span></pre>
       </div>
     </div>
 
@@ -622,14 +1049,8 @@
       <table class="api-table">
         <thead><tr><th>Property</th><th>Type</th><th>Default</th><th>Description</th></tr></thead>
         <tbody>
-          <tr><td><code>checked</code></td><td class="type-col">boolean</td><td><code>false</code></td><td>Checked state</td></tr>
-          <tr><td><code>label</code></td><td class="type-col">string</td><td><code>''</code></td><td>Clickable label text</td></tr>
-        </tbody>
-      </table>
-      <table class="api-table" style="margin-top: 12px;">
-        <thead><tr><th>Event</th><th>Detail</th><th>Description</th></tr></thead>
-        <tbody>
-          <tr><td><code>neu-change</code></td><td class="type-col">{ checked: boolean }</td><td>Fires on check/uncheck</td></tr>
+          <tr><td><code>checked</code></td><td class="type">boolean</td><td><code>false</code></td><td>Checked state</td></tr>
+          <tr><td><code>label</code></td><td class="type">string</td><td><code>''</code></td><td>Label text</td></tr>
         </tbody>
       </table>
     </div>
@@ -638,33 +1059,24 @@
   <!-- ═══ Slider ═══ -->
   <section class="doc-section" id="sliders">
     <h2>Slider</h2>
-    <p class="desc">A range input with a recessed track and an extruded thumb bordered in the accent color. Supports labels and live value display.</p>
+    <p class="desc">Range input with a recessed track and extruded draggable thumb.</p>
 
     <div class="demo-block">
       <h3>Variants</h3>
       <div class="demo-panel">
         <div class="demo-stack">
-          <neu-slider label="Volume" show-value value="65"></neu-slider>
-          <neu-slider label="Brightness" show-value value="80"></neu-slider>
-          <neu-slider label="Temperature" show-value value="22" min="16" max="30" step="0.5"></neu-slider>
+          <tx-slider label="Volume" show-value value="65"></tx-slider>
+          <tx-slider label="Brightness" show-value value="80"></tx-slider>
+          <tx-slider label="Temperature" show-value value="22" min="16" max="30" step="0.5"></tx-slider>
         </div>
       </div>
       <div class="code-block">
         <div class="code-header"><span>HTML</span><button onclick="navigator.clipboard.writeText(this.closest('.code-block').querySelector('pre').textContent)">Copy</button></div>
-<pre><span class="tag">&lt;neu-slider</span>
+<pre><span class="tag">&lt;tx-slider</span>
   <span class="attr">label</span>=<span class="val">"Volume"</span>
   <span class="attr">show-value</span>
   <span class="attr">value</span>=<span class="val">"65"</span>
-<span class="tag">&gt;&lt;/neu-slider&gt;</span>
-
-<span class="tag">&lt;neu-slider</span>
-  <span class="attr">label</span>=<span class="val">"Temperature"</span>
-  <span class="attr">show-value</span>
-  <span class="attr">value</span>=<span class="val">"22"</span>
-  <span class="attr">min</span>=<span class="val">"16"</span>
-  <span class="attr">max</span>=<span class="val">"30"</span>
-  <span class="attr">step</span>=<span class="val">"0.5"</span>
-<span class="tag">&gt;&lt;/neu-slider&gt;</span></pre>
+<span class="tag">&gt;&lt;/tx-slider&gt;</span></pre>
       </div>
     </div>
 
@@ -673,18 +1085,228 @@
       <table class="api-table">
         <thead><tr><th>Property</th><th>Type</th><th>Default</th><th>Description</th></tr></thead>
         <tbody>
-          <tr><td><code>value</code></td><td class="type-col">number</td><td><code>50</code></td><td>Current slider value</td></tr>
-          <tr><td><code>min</code></td><td class="type-col">number</td><td><code>0</code></td><td>Minimum value</td></tr>
-          <tr><td><code>max</code></td><td class="type-col">number</td><td><code>100</code></td><td>Maximum value</td></tr>
-          <tr><td><code>step</code></td><td class="type-col">number</td><td><code>1</code></td><td>Step increment</td></tr>
-          <tr><td><code>label</code></td><td class="type-col">string</td><td><code>''</code></td><td>Label text</td></tr>
-          <tr><td><code>show-value</code></td><td class="type-col">boolean</td><td><code>false</code></td><td>Show live value</td></tr>
+          <tr><td><code>value</code></td><td class="type">number</td><td><code>50</code></td><td>Current value</td></tr>
+          <tr><td><code>min</code></td><td class="type">number</td><td><code>0</code></td><td>Minimum</td></tr>
+          <tr><td><code>max</code></td><td class="type">number</td><td><code>100</code></td><td>Maximum</td></tr>
+          <tr><td><code>step</code></td><td class="type">number</td><td><code>1</code></td><td>Step increment</td></tr>
+          <tr><td><code>label</code></td><td class="type">string</td><td><code>''</code></td><td>Label text</td></tr>
+          <tr><td><code>show-value</code></td><td class="type">boolean</td><td><code>false</code></td><td>Show live value</td></tr>
         </tbody>
       </table>
-      <table class="api-table" style="margin-top: 12px;">
-        <thead><tr><th>Event</th><th>Detail</th><th>Description</th></tr></thead>
+    </div>
+  </section>
+
+  <!-- ═══ Badge ═══ -->
+  <section class="doc-section" id="badges">
+    <h2>Badge</h2>
+    <p class="desc">Small extruded status labels with color variants and optional status dot.</p>
+
+    <div class="demo-block">
+      <h3>Variants</h3>
+      <div class="demo-panel">
+        <div class="demo-row">
+          <tx-badge>Default</tx-badge>
+          <tx-badge color="primary">Primary</tx-badge>
+          <tx-badge color="accent">In Progress</tx-badge>
+          <tx-badge color="success">Complete</tx-badge>
+          <tx-badge color="danger">Urgent</tx-badge>
+        </div>
+        <div class="demo-row" style="margin-top: 16px;">
+          <tx-badge dot color="success">Online</tx-badge>
+          <tx-badge dot color="danger">Critical</tx-badge>
+          <tx-badge dot>Inactive</tx-badge>
+          <tx-badge color="primary" size="lg">Large</tx-badge>
+        </div>
+      </div>
+      <div class="code-block">
+        <div class="code-header"><span>HTML</span><button onclick="navigator.clipboard.writeText(this.closest('.code-block').querySelector('pre').textContent)">Copy</button></div>
+<pre><span class="tag">&lt;tx-badge</span> <span class="attr">color</span>=<span class="val">"success"</span><span class="tag">&gt;</span>Complete<span class="tag">&lt;/tx-badge&gt;</span>
+<span class="tag">&lt;tx-badge</span> <span class="attr">dot</span> <span class="attr">color</span>=<span class="val">"danger"</span><span class="tag">&gt;</span>Critical<span class="tag">&lt;/tx-badge&gt;</span></pre>
+      </div>
+    </div>
+
+    <div class="demo-block">
+      <h3>API</h3>
+      <table class="api-table">
+        <thead><tr><th>Property</th><th>Type</th><th>Default</th><th>Description</th></tr></thead>
         <tbody>
-          <tr><td><code>neu-input</code></td><td class="type-col">{ value: number }</td><td>Fires on value change</td></tr>
+          <tr><td><code>color</code></td><td class="type">'default' | 'primary' | 'accent' | 'success' | 'danger'</td><td><code>'default'</code></td><td>Color variant</td></tr>
+          <tr><td><code>dot</code></td><td class="type">boolean</td><td><code>false</code></td><td>Show status dot</td></tr>
+          <tr><td><code>size</code></td><td class="type">'md' | 'lg'</td><td><code>'md'</code></td><td>Badge size</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- ═══ Avatar ═══ -->
+  <section class="doc-section" id="avatars">
+    <h2>Avatar</h2>
+    <p class="desc">Neumorphic avatar with initials or image. Supports status indicators and multiple sizes.</p>
+
+    <div class="demo-block">
+      <h3>Sizes & Status</h3>
+      <div class="demo-panel">
+        <div class="demo-row" style="gap: 16px;">
+          <tx-avatar size="sm" initials="JD" status="online"></tx-avatar>
+          <tx-avatar initials="AB" status="online"></tx-avatar>
+          <tx-avatar initials="KM" status="away"></tx-avatar>
+          <tx-avatar initials="RS" status="busy"></tx-avatar>
+          <tx-avatar size="lg" initials="TX" status="offline"></tx-avatar>
+          <tx-avatar size="xl" initials="DN"></tx-avatar>
+        </div>
+      </div>
+      <div class="code-block">
+        <div class="code-header"><span>HTML</span><button onclick="navigator.clipboard.writeText(this.closest('.code-block').querySelector('pre').textContent)">Copy</button></div>
+<pre><span class="tag">&lt;tx-avatar</span> <span class="attr">initials</span>=<span class="val">"JD"</span> <span class="attr">status</span>=<span class="val">"online"</span><span class="tag">&gt;&lt;/tx-avatar&gt;</span>
+<span class="tag">&lt;tx-avatar</span> <span class="attr">size</span>=<span class="val">"lg"</span> <span class="attr">src</span>=<span class="val">"photo.jpg"</span><span class="tag">&gt;&lt;/tx-avatar&gt;</span></pre>
+      </div>
+    </div>
+
+    <div class="demo-block">
+      <h3>API</h3>
+      <table class="api-table">
+        <thead><tr><th>Property</th><th>Type</th><th>Default</th><th>Description</th></tr></thead>
+        <tbody>
+          <tr><td><code>src</code></td><td class="type">string</td><td><code>''</code></td><td>Image URL</td></tr>
+          <tr><td><code>initials</code></td><td class="type">string</td><td><code>''</code></td><td>Fallback initials</td></tr>
+          <tr><td><code>status</code></td><td class="type">'online' | 'busy' | 'away' | 'offline'</td><td><code>''</code></td><td>Status indicator</td></tr>
+          <tr><td><code>size</code></td><td class="type">'sm' | 'md' | 'lg' | 'xl'</td><td><code>'md'</code></td><td>Avatar size</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- ═══ Progress ═══ -->
+  <section class="doc-section" id="progress">
+    <h2>Progress</h2>
+    <p class="desc">Animated progress bar with recessed track, label, and color variants.</p>
+
+    <div class="demo-block">
+      <h3>Variants</h3>
+      <div class="demo-panel">
+        <div class="demo-stack">
+          <tx-progress label="Upload" show-value value="73"></tx-progress>
+          <tx-progress label="Completed" show-value value="100" color="success"></tx-progress>
+          <tx-progress label="Storage" show-value value="89" color="danger"></tx-progress>
+          <tx-progress label="Revenue" show-value value="45" color="accent"></tx-progress>
+        </div>
+      </div>
+    </div>
+
+    <div class="demo-block">
+      <h3>Sizes</h3>
+      <div class="demo-panel">
+        <div class="demo-stack">
+          <tx-progress label="Small" size="sm" value="60"></tx-progress>
+          <tx-progress label="Medium" value="60"></tx-progress>
+          <tx-progress label="Large" size="lg" value="60"></tx-progress>
+        </div>
+      </div>
+      <div class="code-block">
+        <div class="code-header"><span>HTML</span><button onclick="navigator.clipboard.writeText(this.closest('.code-block').querySelector('pre').textContent)">Copy</button></div>
+<pre><span class="tag">&lt;tx-progress</span>
+  <span class="attr">label</span>=<span class="val">"Upload"</span>
+  <span class="attr">show-value</span>
+  <span class="attr">value</span>=<span class="val">"73"</span>
+<span class="tag">&gt;&lt;/tx-progress&gt;</span></pre>
+      </div>
+    </div>
+
+    <div class="demo-block">
+      <h3>API</h3>
+      <table class="api-table">
+        <thead><tr><th>Property</th><th>Type</th><th>Default</th><th>Description</th></tr></thead>
+        <tbody>
+          <tr><td><code>value</code></td><td class="type">number</td><td><code>0</code></td><td>Current value</td></tr>
+          <tr><td><code>max</code></td><td class="type">number</td><td><code>100</code></td><td>Maximum value</td></tr>
+          <tr><td><code>label</code></td><td class="type">string</td><td><code>''</code></td><td>Label text</td></tr>
+          <tr><td><code>show-value</code></td><td class="type">boolean</td><td><code>false</code></td><td>Show percentage</td></tr>
+          <tr><td><code>color</code></td><td class="type">'primary' | 'accent' | 'success' | 'danger'</td><td><code>'primary'</code></td><td>Bar color</td></tr>
+          <tr><td><code>size</code></td><td class="type">'sm' | 'md' | 'lg'</td><td><code>'md'</code></td><td>Track height</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- ═══ Tag ═══ -->
+  <section class="doc-section" id="tags">
+    <h2>Tag</h2>
+    <p class="desc">Extruded chips for labels, filters, or selections. Optional remove button.</p>
+
+    <div class="demo-block">
+      <h3>Variants</h3>
+      <div class="demo-panel">
+        <div class="demo-row">
+          <tx-tag>Default</tx-tag>
+          <tx-tag color="primary">Design</tx-tag>
+          <tx-tag color="accent">Frontend</tx-tag>
+          <tx-tag color="success">Approved</tx-tag>
+          <tx-tag color="danger">Blocked</tx-tag>
+        </div>
+        <div class="demo-row" style="margin-top: 16px;">
+          <tx-tag removable color="primary">React</tx-tag>
+          <tx-tag removable color="accent">Lit</tx-tag>
+          <tx-tag removable>TypeScript</tx-tag>
+          <tx-tag size="sm">Small</tx-tag>
+        </div>
+      </div>
+      <div class="code-block">
+        <div class="code-header"><span>HTML</span><button onclick="navigator.clipboard.writeText(this.closest('.code-block').querySelector('pre').textContent)">Copy</button></div>
+<pre><span class="tag">&lt;tx-tag</span> <span class="attr">color</span>=<span class="val">"primary"</span><span class="tag">&gt;</span>Design<span class="tag">&lt;/tx-tag&gt;</span>
+<span class="tag">&lt;tx-tag</span> <span class="attr">removable</span> <span class="attr">color</span>=<span class="val">"accent"</span><span class="tag">&gt;</span>Lit<span class="tag">&lt;/tx-tag&gt;</span></pre>
+      </div>
+    </div>
+
+    <div class="demo-block">
+      <h3>API</h3>
+      <table class="api-table">
+        <thead><tr><th>Property</th><th>Type</th><th>Default</th><th>Description</th></tr></thead>
+        <tbody>
+          <tr><td><code>color</code></td><td class="type">'default' | 'primary' | 'accent' | 'success' | 'danger'</td><td><code>'default'</code></td><td>Color variant</td></tr>
+          <tr><td><code>removable</code></td><td class="type">boolean</td><td><code>false</code></td><td>Show close button</td></tr>
+          <tr><td><code>size</code></td><td class="type">'sm' | 'md'</td><td><code>'md'</code></td><td>Tag size</td></tr>
+        </tbody>
+      </table>
+      <table class="api-table" style="margin-top: 10px;">
+        <thead><tr><th>Event</th><th>Description</th></tr></thead>
+        <tbody>
+          <tr><td><code>tx-remove</code></td><td>Fires when close button is clicked</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- ═══ Divider ═══ -->
+  <section class="doc-section" id="dividers">
+    <h2>Divider</h2>
+    <p class="desc">Neumorphic grooved separator with optional label and vertical orientation.</p>
+
+    <div class="demo-block">
+      <h3>Variants</h3>
+      <div class="demo-panel">
+        <div class="demo-stack" style="gap: 0;">
+          <p style="font-size:0.88rem;color:var(--text-2);">Content above the divider.</p>
+          <tx-divider spacing="md"></tx-divider>
+          <p style="font-size:0.88rem;color:var(--text-2);">Content below the divider.</p>
+          <tx-divider spacing="md" label="or continue with"></tx-divider>
+          <p style="font-size:0.88rem;color:var(--text-2);">Alternative content section.</p>
+        </div>
+      </div>
+      <div class="code-block">
+        <div class="code-header"><span>HTML</span><button onclick="navigator.clipboard.writeText(this.closest('.code-block').querySelector('pre').textContent)">Copy</button></div>
+<pre><span class="tag">&lt;tx-divider</span> <span class="attr">spacing</span>=<span class="val">"md"</span><span class="tag">&gt;&lt;/tx-divider&gt;</span>
+<span class="tag">&lt;tx-divider</span> <span class="attr">label</span>=<span class="val">"or continue with"</span><span class="tag">&gt;&lt;/tx-divider&gt;</span></pre>
+      </div>
+    </div>
+
+    <div class="demo-block">
+      <h3>API</h3>
+      <table class="api-table">
+        <thead><tr><th>Property</th><th>Type</th><th>Default</th><th>Description</th></tr></thead>
+        <tbody>
+          <tr><td><code>label</code></td><td class="type">string</td><td><code>''</code></td><td>Center label text</td></tr>
+          <tr><td><code>vertical</code></td><td class="type">boolean</td><td><code>false</code></td><td>Vertical orientation</td></tr>
+          <tr><td><code>spacing</code></td><td class="type">'none' | 'sm' | 'md' | 'lg'</td><td><code>'none'</code></td><td>Margin around divider</td></tr>
         </tbody>
       </table>
     </div>
@@ -693,51 +1315,65 @@
   <!-- ═══ Card ═══ -->
   <section class="doc-section" id="cards">
     <h2>Card</h2>
-    <p class="desc">A content container with header, body, and footer slots. Supports extruded (default), flat (recessed), and interactive modes.</p>
+    <p class="desc">Extruded content container with header/footer slots. Interactive cards recess on press.</p>
 
     <div class="demo-block">
       <h3>Variants</h3>
       <div class="demo-panel">
         <div class="demo-grid">
-          <neu-card>
-            <h3 slot="header" style="color: #F3B23A; font-size: 1.05rem;">Extruded Card</h3>
-            <p>Standard raised neumorphic card. Content sits naturally on the surface.</p>
-            <div slot="footer"><neu-button size="sm">Action</neu-button></div>
-          </neu-card>
-          <neu-card flat>
-            <h3 slot="header" style="color: #F3B23A; font-size: 1.05rem;">Recessed Card</h3>
-            <p>Uses the <code style="font-family:'JetBrains Mono',monospace;font-size:0.82rem;background:var(--code-bg);padding:2px 6px;border-radius:4px;">flat</code> attribute for an inset well.</p>
-            <div slot="footer"><neu-button size="sm">Learn More</neu-button></div>
-          </neu-card>
-          <neu-card interactive>
-            <h3 slot="header" style="color: #F3B23A; font-size: 1.05rem;">Interactive Card</h3>
-            <p>Hover and press to see shadow transitions. Great for clickable items.</p>
-          </neu-card>
-          <neu-card>
-            <h3 slot="header" style="color: #F3B23A; font-size: 1.05rem;">Nested Controls</h3>
-            <div style="display:flex;flex-direction:column;gap:16px;">
-              <neu-toggle label="Notifications" checked></neu-toggle>
-              <neu-toggle label="Sound"></neu-toggle>
-              <neu-slider label="Opacity" show-value value="75"></neu-slider>
+          <tx-card accent="primary">
+            <h3 slot="header">Project Alpha</h3>
+            <p>Standard card with a primary accent bar and neumorphic shadow.</p>
+            <div slot="footer"><tx-button size="sm" variant="primary">View</tx-button></div>
+          </tx-card>
+          <tx-card accent="accent">
+            <h3 slot="header">Design Review</h3>
+            <p>Accent bar variant. Great for categories or priorities.</p>
+            <div slot="footer"><tx-button size="sm">Details</tx-button></div>
+          </tx-card>
+          <tx-card accent="success" interactive>
+            <h3 slot="header">Task Complete</h3>
+            <p>Interactive card — hover for lift, press for recess.</p>
+          </tx-card>
+          <tx-card accent="danger" compact>
+            <h3 slot="header">Urgent Fix</h3>
+            <p>Compact card with danger accent for dense layouts.</p>
+          </tx-card>
+        </div>
+      </div>
+    </div>
+
+    <div class="demo-block">
+      <h3>Flat & Nested Controls</h3>
+      <div class="demo-panel">
+        <div class="demo-grid">
+          <tx-card flat>
+            <h3 slot="header">Settings</h3>
+            <div style="display:flex;flex-direction:column;gap:14px;">
+              <tx-toggle label="Notifications" checked></tx-toggle>
+              <tx-toggle label="Sound"></tx-toggle>
+              <tx-slider label="Opacity" show-value value="75"></tx-slider>
             </div>
-          </neu-card>
+          </tx-card>
+          <tx-card>
+            <h3 slot="header">Quick Form</h3>
+            <div style="display:flex;flex-direction:column;gap:12px;">
+              <tx-input label="Task name" placeholder="Enter task..."></tx-input>
+              <tx-checkbox label="High priority" checked></tx-checkbox>
+              <tx-button variant="primary" size="sm" style="align-self:flex-start;">Create</tx-button>
+            </div>
+          </tx-card>
         </div>
       </div>
       <div class="code-block">
         <div class="code-header"><span>HTML</span><button onclick="navigator.clipboard.writeText(this.closest('.code-block').querySelector('pre').textContent)">Copy</button></div>
-<pre><span class="tag">&lt;neu-card&gt;</span>
+<pre><span class="tag">&lt;tx-card</span> <span class="attr">accent</span>=<span class="val">"primary"</span><span class="tag">&gt;</span>
   <span class="tag">&lt;h3</span> <span class="attr">slot</span>=<span class="val">"header"</span><span class="tag">&gt;</span>Title<span class="tag">&lt;/h3&gt;</span>
-  <span class="tag">&lt;p&gt;</span>Card body content goes here.<span class="tag">&lt;/p&gt;</span>
+  <span class="tag">&lt;p&gt;</span>Card content.<span class="tag">&lt;/p&gt;</span>
   <span class="tag">&lt;div</span> <span class="attr">slot</span>=<span class="val">"footer"</span><span class="tag">&gt;</span>
-    <span class="tag">&lt;neu-button</span> <span class="attr">size</span>=<span class="val">"sm"</span><span class="tag">&gt;</span>Action<span class="tag">&lt;/neu-button&gt;</span>
+    <span class="tag">&lt;tx-button</span> <span class="attr">size</span>=<span class="val">"sm"</span><span class="tag">&gt;</span>Action<span class="tag">&lt;/tx-button&gt;</span>
   <span class="tag">&lt;/div&gt;</span>
-<span class="tag">&lt;/neu-card&gt;</span>
-
-<span class="comment">&lt;!-- Recessed variant --&gt;</span>
-<span class="tag">&lt;neu-card</span> <span class="attr">flat</span><span class="tag">&gt;</span>...<span class="tag">&lt;/neu-card&gt;</span>
-
-<span class="comment">&lt;!-- Interactive (hover + press) --&gt;</span>
-<span class="tag">&lt;neu-card</span> <span class="attr">interactive</span><span class="tag">&gt;</span>...<span class="tag">&lt;/neu-card&gt;</span></pre>
+<span class="tag">&lt;/tx-card&gt;</span></pre>
       </div>
     </div>
 
@@ -746,16 +1382,18 @@
       <table class="api-table">
         <thead><tr><th>Property</th><th>Type</th><th>Default</th><th>Description</th></tr></thead>
         <tbody>
-          <tr><td><code>flat</code></td><td class="type-col">boolean</td><td><code>false</code></td><td>Recessed / inset look</td></tr>
-          <tr><td><code>interactive</code></td><td class="type-col">boolean</td><td><code>false</code></td><td>Hover and press effects</td></tr>
+          <tr><td><code>accent</code></td><td class="type">'primary' | 'accent' | 'success' | 'danger'</td><td><code>''</code></td><td>Top color bar</td></tr>
+          <tr><td><code>flat</code></td><td class="type">boolean</td><td><code>false</code></td><td>Recessed style</td></tr>
+          <tr><td><code>interactive</code></td><td class="type">boolean</td><td><code>false</code></td><td>Hover / press effects</td></tr>
+          <tr><td><code>compact</code></td><td class="type">boolean</td><td><code>false</code></td><td>Reduced padding</td></tr>
         </tbody>
       </table>
-      <table class="api-table" style="margin-top: 12px;">
+      <table class="api-table" style="margin-top: 10px;">
         <thead><tr><th>Slot</th><th>Description</th></tr></thead>
         <tbody>
-          <tr><td><code>header</code></td><td>Card title area</td></tr>
-          <tr><td><code>(default)</code></td><td>Main card body</td></tr>
-          <tr><td><code>footer</code></td><td>Footer with actions</td></tr>
+          <tr><td><code>header</code></td><td>Card title</td></tr>
+          <tr><td><code>(default)</code></td><td>Card body</td></tr>
+          <tr><td><code>footer</code></td><td>Footer actions</td></tr>
         </tbody>
       </table>
     </div>
@@ -763,7 +1401,57 @@
 
 </main>
 
-<script>
+<script type="module">
+  import { setTheme, resetTheme } from '/src/index.ts';
+
+  const btns = document.querySelectorAll('.theme-btn');
+  const root = document.documentElement;
+
+  const pagePalettes = {
+    light: {
+      '--bg': '#E8ECF0', '--surface': '#E8ECF0', '--text': '#1A2138', '--text-2': '#4D5B6A', '--text-3': '#6B7886', '--code-bg': '#DFE3E8',
+      '--neu-shadow': '4px 4px 8px rgba(174,182,196,0.18), -4px -4px 8px rgba(255,255,255,0.65)',
+      '--neu-shadow-sm': '2px 2px 5px rgba(174,182,196,0.18), -2px -2px 5px rgba(255,255,255,0.65)',
+      '--neu-inset': 'inset 2px 2px 5px rgba(174,182,196,0.18), inset -2px -2px 5px rgba(255,255,255,0.65)',
+      '--neu-inset-sm': 'inset 1px 1px 3px rgba(174,182,196,0.18), inset -1px -1px 3px rgba(255,255,255,0.65)',
+    },
+    dark: {
+      '--bg': '#141414', '--surface': '#141414', '--text': '#E8ECF4', '--text-2': '#A0A8B4', '--text-3': '#6E7A88', '--code-bg': '#0C0C0C',
+      '--neu-shadow': '4px 4px 8px rgba(0,0,0,0.5), -4px -4px 8px rgba(40,40,40,0.35)',
+      '--neu-shadow-sm': '2px 2px 5px rgba(0,0,0,0.5), -2px -2px 5px rgba(40,40,40,0.35)',
+      '--neu-inset': 'inset 2px 2px 5px rgba(0,0,0,0.5), inset -2px -2px 5px rgba(40,40,40,0.35)',
+      '--neu-inset-sm': 'inset 1px 1px 3px rgba(0,0,0,0.5), inset -1px -1px 3px rgba(40,40,40,0.35)',
+    },
+    ocean: {
+      '--bg': '#E2EBF0', '--surface': '#E2EBF0', '--text': '#0C2340', '--text-2': '#3D5A74', '--text-3': '#567390', '--code-bg': '#D6DFE8',
+      '--neu-shadow': '4px 4px 8px rgba(160,175,190,0.22), -4px -4px 8px rgba(255,255,255,0.68)',
+      '--neu-shadow-sm': '2px 2px 5px rgba(160,175,190,0.22), -2px -2px 5px rgba(255,255,255,0.68)',
+      '--neu-inset': 'inset 2px 2px 5px rgba(160,175,190,0.22), inset -2px -2px 5px rgba(255,255,255,0.68)',
+      '--neu-inset-sm': 'inset 1px 1px 3px rgba(160,175,190,0.22), inset -1px -1px 3px rgba(255,255,255,0.68)',
+    },
+  };
+
+  btns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const name = btn.dataset.theme;
+      btns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+
+      if (name === 'light') {
+        resetTheme();
+      } else {
+        setTheme(name);
+      }
+
+      const palette = pagePalettes[name];
+      if (palette) {
+        for (const [prop, val] of Object.entries(palette)) {
+          root.style.setProperty(prop, val);
+        }
+      }
+    });
+  });
+
   const links = document.querySelectorAll('.sidebar a[href^="#"]');
   const observer = new IntersectionObserver(entries => {
     entries.forEach(entry => {
@@ -774,7 +1462,7 @@
       }
     });
   }, { rootMargin: '-20% 0px -75% 0px' });
-  document.querySelectorAll('.doc-section, .hero .install-box').forEach(s => observer.observe(s));
+  document.querySelectorAll('.doc-section, .hero').forEach(s => { if (s.id) observer.observe(s); });
 </script>
 
 </body>

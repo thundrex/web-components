@@ -1,4 +1,4 @@
-name: Deploy ThunderX docs to Pages
+name: Deploy Thundrex docs to Pages
 
 on:
   push:
@@ -38,9 +38,9 @@ jobs:
           path: |
             node_modules
             dist
-          key: ${{ runner.os }}-thunderx-build-${{ hashFiles('dist') }}
+          key: ${{ runner.os }}-thundrex-build-${{ hashFiles('dist') }}
           restore-keys: |
-            ${{ runner.os }}-thunderx-build-
+            ${{ runner.os }}-thundrex-build-
 
       - name: Install dependencies
         run: npm i

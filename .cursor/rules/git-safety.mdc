@@ -1,0 +1,13 @@
+---
+description: Never touch git auth, SSH keys, or push code without explicit user request
+alwaysApply: true
+---
+
+# Git & Auth Safety
+
+- **NEVER** run `git push`, `git push -u`, or any push command unless the user explicitly asks to push
+- **NEVER** run `gh auth login`, `gh auth`, or any authentication commands
+- **NEVER** touch SSH keys, git credentials, or any auth-related configuration
+- **NEVER** modify `.gitconfig` or any git/SSH config files
+- Only make local changes: edits, local commits (when asked), and builds
+- Pushing and authentication are always the user's responsibility
