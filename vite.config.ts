@@ -1,7 +1,7 @@
 import { defineConfig } from 'vite';
 
 export default defineConfig({
-  base: '/web-components/',
+  base: process.env.VITE_APP_BASE_URL || '/web-components/',
   build: {
     outDir: 'dist',
   },
